@@ -25,6 +25,7 @@ import { JsonLd } from '@/components/seo/json-ld';
 import { Badge } from '@/components/ui/badge';
 import { CalculatorClient, CalculatorFaq } from './calculator-client';
 import ShareButtons from '@/components/ShareButtons';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                           */
@@ -239,169 +240,137 @@ export default async function CalculatorSlugPage({
 
         <div className="animate-fade-in">
           {/* Header */}
-          <div className="mb-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div className="mb-4 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
             <div>
-              <span className="category-badge mb-2 bg-accent text-accent-foreground capitalize inline-block">
+              <span className="category-badge mb-2 bg-accent text-accent-foreground capitalize inline-block text-xs px-2 py-0.5 rounded-full">
                 {calc.category}
               </span>
-              <h1 className="mt-2 text-2xl font-extrabold md:text-3xl">
+              <h1 className="text-2xl font-extrabold md:text-3xl">
                 {calc.title}
               </h1>
+              {/* Short Intro - Just first 2 sentences */}
+              <div className="mt-2 text-muted-foreground text-sm md:text-base leading-relaxed max-w-3xl">
+                {sentenceToParagraphs(introText).slice(0, 2)}
+              </div>
             </div>
-            <div className="mt-2 md:mt-0 self-start">
+            <div className="mt-1 self-start">
               <ShareButtons title={calc.title} />
             </div>
           </div>
 
-          {/* Intro — server rendered for AEO */}
-          <div className="mb-6 space-y-3">
-            {sentenceToParagraphs(introText)}
+          {/* Interactive Calculator — Client Component boundary (HERO OF THE PAGE) */}
+          <div className="mb-10">
+            <CalculatorClient calc={calc} />
           </div>
 
-          {isDeep && (
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary">
-              <Sparkles className="h-3.5 w-3.5" />
-              Reviewed &amp; expanded by our editorial team
-            </div>
-          )}
+          {/* --- Content Below the Fold --- */}
 
-          {/* Topic / Tags */}
-          <div className="mb-8 flex flex-wrap gap-2">
+          {/* Tags / Topic Hubs */}
+          <div className="mb-8 flex flex-wrap items-center gap-2">
+            <span className="text-sm font-semibold text-foreground mr-1">Topics:</span>
             {taxonomy.topicHubs.map((hub) => (
-              <Badge
-                key={hub}
-                variant="secondary"
-                className="rounded-full px-3 py-1"
-              >
+              <Badge key={hub} variant="secondary" className="rounded-full px-3 py-1 font-medium">
                 {hub}
               </Badge>
             ))}
-            {taxonomy.tags.slice(0, 6).map((tag) => (
-              <Badge
-                key={tag}
-                variant="outline"
-                className="rounded-full px-3 py-1"
-              >
+            {taxonomy.tags.slice(0, 4).map((tag) => (
+              <Badge key={tag} variant="outline" className="rounded-full px-3 py-1 font-normal text-muted-foreground">
                 {tag}
               </Badge>
             ))}
           </div>
 
-          {/* Quick Answer — server rendered for featured-snippet eligibility */}
-          <section className="mb-8 rounded-2xl border border-border bg-card p-5 md:p-6">
-            <h2 className="mb-3 text-xl font-bold">Quick Answer</h2>
-            <div className="space-y-3">
+          {/* Quick Answer */}
+          <section className="mb-8 rounded-2xl border border-border bg-card p-5 md:p-6 shadow-sm">
+            <h2 className="mb-3 text-lg font-bold flex items-center gap-2">
+              <CheckCircle2 className="h-5 w-5 text-primary" />
+              Quick Answer
+            </h2>
+            <div className="space-y-2 text-sm leading-relaxed text-muted-foreground">
               {sentenceToParagraphs(calc.metaDescription)}
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                If you have been comparing numbers in your head and still feel
-                unsure, this tool keeps things simple by showing the result
-                clearly using the standard formula for{' '}
-                {calc.shortTitle.toLowerCase()}.
-              </p>
             </div>
           </section>
 
           {/* Interactive Calculator — Client Component boundary */}
           <CalculatorClient calc={calc} />
 
-          {/* Who Should Use + Why Useful */}
-          <section className="mb-10 grid gap-4 md:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-card p-5">
-              <h2 className="mb-3 text-xl font-bold">
-                Who Should Use This Calculator
-              </h2>
-              <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-                {enriched.whoShouldUse.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-5">
-              <h2 className="mb-3 text-xl font-bold">
-                Why It&apos;s Useful
-              </h2>
-              <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-                {enriched.whyUseful.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
+          {/* Progressive Disclosure SEO Content */}
+          <Accordion type="single" collapsible className="mb-10 w-full space-y-4">
+            
+            {/* Guide & Usage details */}
+            <AccordionItem value="how-it-works" className="rounded-xl border border-border bg-card px-4">
+              <AccordionTrigger className="text-base font-bold hover:no-underline">
+                How to Use & Who It's For
+              </AccordionTrigger>
+              <AccordionContent className="pt-2 pb-6 text-sm text-muted-foreground">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div>
+                    <h3 className="mb-2 font-semibold text-foreground">Step-by-Step Guide</h3>
+                    <ol className="space-y-2">
+                      {enriched.howToSteps.map((step, i) => (
+                        <li key={i} className="flex gap-2">
+                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                            {i + 1}
+                          </span>
+                          <span className="leading-relaxed">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  <div>
+                    <h3 className="mb-2 font-semibold text-foreground">Who Should Use This</h3>
+                    <ul className="space-y-2">
+                      {enriched.whoShouldUse.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                          <span className="leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-          {/* How to Use */}
-          <section className="mb-10">
-            <h2 className="mb-4 text-xl font-bold">
-              How to Use This Calculator
-            </h2>
-            <div className="rounded-2xl border border-border bg-card p-5">
-              <ol className="space-y-3 text-sm leading-relaxed text-muted-foreground">
-                {enriched.howToSteps.map((step, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-                      {i + 1}
-                    </span>
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </section>
+            {/* Formula & Example details */}
+            <AccordionItem value="formula-example" className="rounded-xl border border-border bg-card px-4">
+              <AccordionTrigger className="text-base font-bold hover:no-underline">
+                Formula & Example Calculation
+              </AccordionTrigger>
+              <AccordionContent className="pt-2 pb-6 text-sm text-muted-foreground">
+                <div className="mb-4 rounded-lg bg-muted/50 p-4 font-mono text-xs font-semibold text-primary">
+                  {calc.formula}
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="mb-1 font-semibold text-foreground">Understanding the Formula</h3>
+                    <div className="space-y-2 leading-relaxed">{sentenceToParagraphs(calc.formulaExplanation)}</div>
+                  </div>
+                  <div className="rounded-lg border border-border bg-background p-4">
+                    <h3 className="mb-1 font-semibold text-foreground">Practical Example</h3>
+                    <div className="space-y-2 leading-relaxed">{sentenceToParagraphs(calc.exampleCalculation)}</div>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
 
-          {/* What This Tool Checks */}
-          <section className="mb-10">
-            <h2 className="mb-3 text-xl font-bold">
-              What This Tool Helps You Check
-            </h2>
-            <div className="rounded-2xl border border-border bg-card p-5">
-              <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-                {fieldLabels.map((label) => (
-                  <li key={label}>
-                    • Enter your {label.toLowerCase()} and get a faster estimate
-                    without manual math.
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          {/* Formula */}
-          <section className="mb-10">
-            <h2 className="mb-4 text-xl font-bold">Formula</h2>
-            <div className="formula-box">
-              <div className="mb-3 rounded-lg border border-border bg-card px-4 py-3 font-mono text-sm font-semibold text-primary">
-                {calc.formula}
-              </div>
-              <div className="space-y-3">
-                {sentenceToParagraphs(calc.formulaExplanation)}
-              </div>
-            </div>
-          </section>
-
-          {/* Example */}
-          <section className="mb-10">
-            <h2 className="mb-4 text-xl font-bold">Example Calculation</h2>
-            <div className="rounded-xl border border-border bg-card p-5">
-              <div className="space-y-3">
-                {sentenceToParagraphs(calc.exampleCalculation)}
-              </div>
-            </div>
-          </section>
-
-          {/* Philippines Context */}
-          <section className="mb-10">
-            <h2 className="mb-4 text-xl font-bold">Philippines Context</h2>
-            <div className="rounded-xl border border-border bg-accent/30 p-5">
-              <div className="space-y-3">
+            {/* Philippines Context details */}
+            <AccordionItem value="ph-context" className="rounded-xl border border-border bg-card px-4">
+              <AccordionTrigger className="text-base font-bold hover:no-underline">
+                Philippine Rules & Regulations
+              </AccordionTrigger>
+              <AccordionContent className="pt-2 pb-6 text-sm text-muted-foreground space-y-2 leading-relaxed">
                 {sentenceToParagraphs(calc.philippinesContext)}
-              </div>
-            </div>
-          </section>
+                
+                {isDeep && (
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    Reviewed &amp; expanded by our editorial team
+                  </div>
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
 
           {/* FAQ — Client Component for accordion */}
           <CalculatorFaq faqs={allFaqs} />
