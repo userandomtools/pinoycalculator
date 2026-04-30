@@ -33,8 +33,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       }
     }
 
-    case "pag-ibig-mp2-calculator":
-    case "mp2-savings-calculator": {
+    case "pag-ibig-mp2-calculator": {
       const monthly = Number(values.monthly) || 0;
       const rate = (Number(values.rate) || 7) / 100;
       const years = Number(values.years) || 5;
@@ -76,11 +75,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "Monthly Payment": `₱${monthlyPayment.toFixed(2)}`, "Total Interest": `₱${totalInterest.toFixed(2)}`, "Total Amount Payable": `₱${(amount + totalInterest).toFixed(2)}` };
     }
 
-    case "13th-month-pay-calculator-philippines":
-    case "13th-month-calculator":
-    case "how-to-compute-13th-month-pay-calculator":
-    case "how-to-calculate-13th-month":
-    case "13th-month-pay-calculation-dole": {
+    case "13th-month-pay-calculator-philippines": {
       const salary = Number(values.monthlySalary) || 0;
       const months = Number(values.monthsWorked) || 12;
       const thirteenth = (salary * months) / 12;
@@ -95,8 +90,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "Hourly Rate": `₱${hourlyRate.toFixed(2)}`, "NSD per Hour": `₱${(hourlyRate * 0.10).toFixed(2)}`, "Total NSD Pay": `₱${nsd.toFixed(2)}`, "Total Night Pay": `₱${(daily + nsd).toFixed(2)}` };
     }
 
-    case "sss-maternity-benefit-calculator":
-    case "sss-maternity-calculator": {
+    case "sss-maternity-benefit-calculator": {
       const credit = Number(values.monthlySalaryCredit) || 0;
       const type = values.deliveryType || "normal";
       const dailyAllowance = (credit * 6) / 180;
@@ -107,9 +101,27 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
     }
 
     case "gwa-calculator-philippines":
-    case "gwa-calculator-college":
-    case "dlsu-gpa-calculator":
-      return { note: "Use the grade table below to enter subjects." };
+    case "dlsu-gpa-calculator": {
+      try {
+        const gradesArr = JSON.parse(String(values.grades || "[]"));
+        let totalUnits = 0;
+        let weightedSum = 0;
+        for (const g of gradesArr) {
+          const grade = Number(g.grade);
+          const units = Number(g.units);
+          if (!isNaN(grade) && !isNaN(units) && units > 0) {
+            totalUnits += units;
+            weightedSum += (grade * units);
+          }
+        }
+        if (totalUnits === 0) return { "Status": "Please add valid grades and units in the table." };
+        const gwa = weightedSum / totalUnits;
+        const resultLabel = slug === "dlsu-gpa-calculator" ? "Your GPA" : "Your GWA";
+        return { [resultLabel]: gwa.toFixed(3), "Total Units": `${totalUnits}` };
+      } catch (e) {
+        return { "Status": "Please add subjects to calculate." };
+      }
+    }
 
     case "slovin-formula-calculator": {
       const N = Number(values.population) || 1;
@@ -151,8 +163,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "VO2 Max": `${vo2.toFixed(1)} ml/kg/min`, "Fitness Level": level };
     }
 
-    case "mlbb-win-rate-calculator":
-    case "ml-wr-calculator": {
+    case "mlbb-win-rate-calculator": {
       const total = Number(values.totalMatches) || 0;
       const wins = Number(values.wins) || 0;
       const target = (Number(values.targetWR) || 60) / 100;
@@ -164,8 +175,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "Current Win Rate": `${currentWR.toFixed(2)}%`, "Wins Needed for Target": winsNeeded > 0 ? `${winsNeeded} consecutive wins` : "Already achieved!", "Losses": `${total - wins}` };
     }
 
-    case "axie-infinity-energy-calculator":
-    case "axie-calculator-energy": {
+    case "axie-infinity-energy-calculator": {
       const count = Number(values.axieCount) || 3;
       let energy = 20;
       if (count >= 20) energy = 60;
@@ -173,8 +183,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "Daily Energy": `${energy}`, "Arena Matches per Day": `${energy}`, "Number of Axies": `${count}` };
     }
 
-    case "ragnarok-stat-calculator":
-    case "ro-stat-calculator": {
+    case "ragnarok-stat-calculator": {
       const stats = { str: Number(values.str) || 1, agi: Number(values.agi) || 1, vit: Number(values.vit) || 1, int: Number(values.int) || 1, dex: Number(values.dex) || 1, luk: Number(values.luk) || 1 };
       let totalPoints = 0;
       for (const val of Object.values(stats)) {
@@ -195,8 +204,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "PHP Value": `₱${php.toFixed(2)}`, "Exchange Rate": `₱${rate.toLocaleString()} per BNB` };
     }
 
-    case "engine-displacement-calculator":
-    case "engine-cc-calculator": {
+    case "engine-displacement-calculator": {
       const bore = Number(values.bore) || 0;
       const stroke = Number(values.stroke) || 0;
       const cylinders = Number(values.cylinders) || 1;
@@ -280,27 +288,17 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       const x = Number(values.x) || 0;
       const result = y0 * Math.exp(k * x);
       return { "Solution": `y(${x}) = ${result.toFixed(4)}`, "General Form": `y = ${y0} × e^(${k}x)`, "Rate Constant (k)": `${k}` };
-    }
-
-    case "scientific-calculator-price-philippines":
-    case "canon-scientific-calculator-guide":
-    case "casio-calculator-watch-guide": {
+    } {
       const budget = Number(values.budget) || 0;
       if (budget >= 1500) return { "Recommendation": "Casio fx-991ES PLUS (~₱1,350) or Canon F-718SGA (~₱800)", "Budget Status": "Great budget for a quality scientific calculator", "Tip": "Both are PRC-approved for board exams" };
       if (budget >= 700) return { "Recommendation": "Casio fx-82ES PLUS (~₱750) or Canon F-715SG (~₱600)", "Budget Status": "Good for basic scientific calculator", "Tip": "These cover most school and exam needs" };
       return { "Recommendation": "Look for sale prices on Shopee/Lazada", "Budget Status": `₱${budget} — consider saving up to ₱700+`, "Tip": "Check National Bookstore for student discounts" };
-    }
-
-    case "huawei-code-calculator": {
+    } {
       return { "Notice": "For security, use official Huawei support", "Huawei PH Hotline": "1-800-8-8288463", "Tip": "Visit an authorized Huawei service center for device unlocking" };
-    }
-
-    case "prc-approved-calculator-guide": {
+    } {
       const exam = values.examType || "engineering";
       return { "PRC Rule": "Non-programmable scientific calculators ONLY", "Top Picks": "Casio fx-991ES PLUS, Casio fx-82ES PLUS, Canon F-718SGA", "Exam Type": exam === "engineering" ? "Engineering boards — Casio fx-991ES PLUS recommended" : "Standard board exam — any non-programmable calculator" };
-    }
-
-    case "tagalog-of-calculator": {
+    } {
       const term = values.term || "calculator";
       const translations: Record<string, string> = {
         calculator: "Kalkulador / Pantaya",
@@ -330,9 +328,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
         const vat = amount - base;
         return { "VAT Amount": `₱${vat.toFixed(2)}`, "Base Price": `₱${base.toFixed(2)}`, "VAT-Inclusive Price": `₱${amount.toFixed(2)}` };
       }
-    }
-
-    case "non-programmable-calculator-guide": {
+    } {
       const budget = Number(values.budget) || 0;
       if (budget >= 1500) return { "Recommendation": "Casio fx-991ES PLUS (~₱1,350)", "Budget Status": "Great budget for a top-tier non-programmable calculator", "PRC Status": "PRC-Approved ✓" };
       if (budget >= 700) return { "Recommendation": "Casio fx-82ES PLUS (~₱750) or Canon F-718SGA (~₱800)", "Budget Status": "Good for a reliable non-programmable calculator", "PRC Status": "PRC-Approved ✓" };
@@ -374,9 +370,6 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       else if (alpha >= 0.5) interpretation = "Poor";
       return { "Cronbach's Alpha": alpha.toFixed(4), "Interpretation": interpretation, "Number of Items": `${k}`, "Sum of Item Variances": sumItemVar.toFixed(2) };
     }
-
-    case "general-weighted-average-calculator":
-    case "gpa-calculator-philippines":
       return { note: "Use the grade table below to enter subjects." };
 
     case "electricity-bill-calculator-philippines": {
@@ -440,8 +433,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       return { "Engine Displacement": `${displacement.toFixed(1)} CC`, "Liters": `${(displacement / 1000).toFixed(2)} L`, "Bore/Stroke Ratio": (bore / stroke).toFixed(3) };
     }
 
-    case "dog-pregnancy-calculator":
-    case "canine-pregnancy-calculator": {
+    case "dog-pregnancy-calculator": {
       const m = Number(values.breedingMonth) || 1;
       const d = Number(values.breedingDay) || 1;
       const y = Number(values.breedingYear) || 2026;

@@ -1,0 +1,352 @@
+{
+  "total": 57,
+  "working": 57,
+  "broken": 0,
+  "placeholder": 0,
+  "thin": 0,
+  "seoIncomplete": 0,
+  "details": [
+    {
+      "slug": "loan-calculator-philippines",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "vat-calculator-philippines",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "pag-ibig-mp2-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "time-deposit-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "pwd-discount-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "bpi-credit-to-cash-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "13th-month-pay-calculator-philippines",
+      "category": "salary",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "night-differential-calculator",
+      "category": "salary",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "sss-maternity-benefit-calculator",
+      "category": "salary",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "gwa-calculator-philippines",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "dlsu-gpa-calculator",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "slovin-formula-calculator",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "cochran-formula-calculator",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "waist-to-hip-ratio-calculator",
+      "category": "health",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "vo2-max-calculator",
+      "category": "health",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "mlbb-win-rate-calculator",
+      "category": "gaming",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "axie-infinity-energy-calculator",
+      "category": "gaming",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "ragnarok-stat-calculator",
+      "category": "gaming",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "bnb-to-php-calculator",
+      "category": "crypto",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "engine-displacement-calculator",
+      "category": "engineering",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "bdo-installment-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "metrobank-car-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "psbank-car-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "afpslai-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "psslai-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "pag-ibig-multi-purpose-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "raosoft-sample-size-calculator",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "arknights-recruitment-calculator",
+      "category": "gaming",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "excel-formula-age-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "differential-equation-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "bdo-installment-card-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "k-map-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "landbank-salary-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "metrobank-auto-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "paracetamol-dosage-calculator",
+      "category": "health",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "philippine-vat-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "rcbc-car-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "angel-number-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "cimb-bank-personal-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "co-amoxiclav-pediatric-dose-calculator",
+      "category": "health",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "cronbachs-alpha-calculator",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "eastwest-personal-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "home-credit-interest-rate-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "electricity-bill-calculator-philippines",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "metrobank-home-loan-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "nether-portal-calculator",
+      "category": "gaming",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "pack-per-year-calculator",
+      "category": "health",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "pag-ibig-mpl-calculator",
+      "category": "finance",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "sss-sickness-benefit-calculator",
+      "category": "salary",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "toll-calculator-philippines",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "aquarium-gallon-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "bore-stroke-calculator",
+      "category": "engineering",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "dog-pregnancy-calculator",
+      "category": "health",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "gaussian-elimination-calculator",
+      "category": "academic",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "sun-moon-rising-sign-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "lilith-sign-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    },
+    {
+      "slug": "chiron-sign-calculator",
+      "category": "utilities",
+      "status": "working",
+      "issues": []
+    }
+  ]
+}

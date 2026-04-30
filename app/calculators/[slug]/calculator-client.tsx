@@ -5,6 +5,75 @@ import { ChevronDown } from 'lucide-react';
 import type { CalculatorDefinition } from '@/data/calculators';
 import { computeCalculator } from '@/lib/calculator-engine';
 import { FinanceCharts } from '@/components/FinanceCharts';
+import { Plus, Trash2 } from 'lucide-react';
+
+interface GradeRow {
+  subject: string;
+  grade: string;
+  units: string;
+}
+
+function GradeTableField({ id, value, onChange }: { id: string; value: string; onChange: (v: string) => void }) {
+  const [rows, setRows] = useState<GradeRow[]>(() => {
+    try {
+      return value ? JSON.parse(value) : [{ subject: '', grade: '', units: '' }];
+    } catch {
+      return [{ subject: '', grade: '', units: '' }];
+    }
+  });
+
+  const updateRow = (index: number, field: keyof GradeRow, val: string) => {
+    const newRows = [...rows];
+    newRows[index][field] = val;
+    setRows(newRows);
+    onChange(JSON.stringify(newRows));
+  };
+
+  const addRow = () => {
+    const newRows = [...rows, { subject: '', grade: '', units: '' }];
+    setRows(newRows);
+    onChange(JSON.stringify(newRows));
+  };
+
+  const removeRow = (index: number) => {
+    const newRows = rows.filter((_, i) => i !== index);
+    if (newRows.length === 0) newRows.push({ subject: '', grade: '', units: '' });
+    setRows(newRows);
+    onChange(JSON.stringify(newRows));
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-12 gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+        <div className="col-span-5">Subject</div>
+        <div className="col-span-3 text-center">Grade</div>
+        <div className="col-span-3 text-center">Units</div>
+        <div className="col-span-1"></div>
+      </div>
+      {rows.map((row, i) => (
+        <div key={i} className="grid grid-cols-12 gap-2 items-center">
+          <div className="col-span-5">
+            <input type="text" className="calc-input text-sm px-3 py-2" placeholder="Subject (opt)" value={row.subject} onChange={e => updateRow(i, 'subject', e.target.value)} />
+          </div>
+          <div className="col-span-3">
+            <input type="number" className="calc-input text-sm px-3 py-2 text-center" placeholder="1.0" step="0.01" value={row.grade} onChange={e => updateRow(i, 'grade', e.target.value)} />
+          </div>
+          <div className="col-span-3">
+            <input type="number" className="calc-input text-sm px-3 py-2 text-center" placeholder="3" step="0.5" value={row.units} onChange={e => updateRow(i, 'units', e.target.value)} />
+          </div>
+          <div className="col-span-1 flex justify-end">
+            <button type="button" onClick={() => removeRow(i)} className="p-2 text-muted-foreground hover:text-destructive transition-colors" aria-label="Remove row">
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      ))}
+      <button type="button" onClick={addRow} className="mt-2 flex items-center text-sm font-medium text-primary hover:underline">
+        <Plus className="w-4 h-4 mr-1" /> Add Subject
+      </button>
+    </div>
+  );
+}
 
 interface CalculatorClientProps {
   calc: CalculatorDefinition;
@@ -38,7 +107,13 @@ export function CalculatorClient({ calc }: CalculatorClientProps) {
           .map((field) => (
             <div key={field.id}>
               <label className="mb-1.5 block text-sm font-medium">{field.label}</label>
-              {field.type === 'select' ? (
+              {field.type === 'grade-table' ? (
+                <GradeTableField
+                  id={field.id}
+                  value={String(values[field.id] || '')}
+                  onChange={(v) => handleFieldChange(field.id, v)}
+                />
+              ) : field.type === 'select' ? (
                 <select
                   className="calc-input"
                   value={String(

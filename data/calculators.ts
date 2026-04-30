@@ -5,7 +5,7 @@ export type CalculatorCategory = "finance" | "salary" | "gaming" | "academic" | 
 export interface CalculatorField {
   id: string;
   label: string;
-  type: "number" | "select" | "text";
+  type: "number" | "select" | "text" | "grade-table";
   placeholder?: string;
   suffix?: string;
   prefix?: string;
@@ -311,7 +311,7 @@ export const calculators: CalculatorDefinition[] = [
     icon: "GraduationCap",
     description: "Calculate your General Weighted Average (GWA) for Philippine colleges and universities. Enter your grades and units to get your GWA instantly.",
     fields: [
-      { id: "grades", label: "Enter grades below", type: "text", placeholder: "Use the grade table below" },
+      { id: "grades", label: "Grade Entries", type: "grade-table" },
     ],
     formula: "GWA = Σ(Grade × Units) ÷ Σ(Units)",
     formulaExplanation: "Multiply each subject's grade by its number of units, sum all products, then divide by the total number of units.",
@@ -335,7 +335,7 @@ export const calculators: CalculatorDefinition[] = [
     icon: "Award",
     description: "Convert your De La Salle University grades to GPA. DLSU uses a unique grading system from 0.0 to 4.0.",
     fields: [
-      { id: "grades", label: "Enter DLSU grades below", type: "text", placeholder: "Use the grade table below" },
+      { id: "grades", label: "DLSU Grade Entries", type: "grade-table" },
     ],
     formula: "GPA = Σ(Grade Point × Units) ÷ Σ(Units)",
     formulaExplanation: "Multiply each course's grade point by its units, sum all, then divide by total units.",
@@ -799,189 +799,14 @@ export const calculators: CalculatorDefinition[] = [
     references: [],
   },
   // SEO ALIAS/VARIANT CALCULATORS
-  {
-    slug: "mp2-savings-calculator",
-    title: "MP2 Savings Calculator – Pag-IBIG Modified Savings Program",
-    shortTitle: "MP2 Savings",
-    metaDescription: "Calculate your Pag-IBIG MP2 savings and dividends. Free MP2 savings growth calculator for Filipinos.",
-    category: "finance",
-    icon: "PiggyBank",
-    description: "Estimate your MP2 (Modified Pag-IBIG II) savings growth and dividends. Same computation as the Pag-IBIG MP2 calculator with a focus on savings planning.",
-    fields: [
-      { id: "monthly", label: "Monthly Savings (₱)", type: "number", placeholder: "e.g. 5000", prefix: "₱", min: 500 },
-      { id: "rate", label: "Expected Annual Dividend Rate (%)", type: "number", placeholder: "e.g. 7", suffix: "%", min: 0, max: 20, step: 0.1, defaultValue: 7 },
-      { id: "years", label: "Savings Period (years)", type: "number", placeholder: "5", min: 1, max: 30, defaultValue: 5 },
-    ],
-    formula: "FV = PMT × [((1 + r/12)^(n×12) - 1) / (r/12)]",
-    formulaExplanation: "Future value of regular monthly savings with compound interest. PMT = monthly contribution, r = annual rate, n = years.",
-    exampleCalculation: "Saving ₱5,000/month for 5 years at 7%: Total savings = ₱300,000. Estimated value = ~₱358,000. Dividends = ~₱58,000.",
-    philippinesContext: "MP2 is one of the best low-risk savings options in the Philippines. Pag-IBIG Fund guarantees your capital and dividends are tax-free. It's ideal for Filipinos looking for safe, high-yield savings.",
-    faqs: [
-      { question: "Is MP2 the same as regular Pag-IBIG savings?", answer: "No. MP2 is a separate voluntary savings program with higher dividend rates than the regular Pag-IBIG savings." },
-      { question: "How do I open an MP2 account?", answer: "Visit any Pag-IBIG branch or use the Pag-IBIG Virtual Fund online portal. You need an active Pag-IBIG membership." },
-    ],
-    relatedSlugs: ["pag-ibig-mp2-calculator", "time-deposit-calculator", "pag-ibig-multi-purpose-loan-calculator"],
-    references: [{ title: "Pag-IBIG Fund", url: "https://www.pagibigfund.gov.ph" }],
-  },
-  {
-    slug: "ml-wr-calculator",
-    title: "ML WR Calculator – Mobile Legends Win Rate Checker",
-    shortTitle: "ML WR Calculator",
-    metaDescription: "Calculate your ML (Mobile Legends) win rate. Free WR calculator to track your MLBB statistics and target win rate.",
-    category: "gaming",
-    icon: "Swords",
-    description: "Check and calculate your Mobile Legends (ML) win rate. Find out how many wins you need to reach your target WR percentage.",
-    fields: [
-      { id: "totalMatches", label: "Total Matches Played", type: "number", placeholder: "e.g. 500", min: 0 },
-      { id: "wins", label: "Total Wins", type: "number", placeholder: "e.g. 280", min: 0 },
-      { id: "targetWR", label: "Target Win Rate (%)", type: "number", placeholder: "e.g. 60", suffix: "%", min: 0, max: 100, defaultValue: 60 },
-    ],
-    formula: "WR = (Wins ÷ Total Matches) × 100",
-    formulaExplanation: "Win rate is calculated by dividing wins by total matches and multiplying by 100. Wins needed formula: (Target × (Total + X) = Wins + X).",
-    exampleCalculation: "500 matches, 280 wins: WR = 56%. To reach 60% WR, you need approximately 50 consecutive wins.",
-    philippinesContext: "ML or Mobile Legends: Bang Bang is the #1 mobile game in the Philippines. Filipino gamers use WR (win rate) as a key metric for ranking up and hero mastery.",
-    faqs: [
-      { question: "What does WR mean in ML?", answer: "WR stands for Win Rate — the percentage of games you've won out of total matches played." },
-      { question: "What's a good WR in Mobile Legends?", answer: "Above 55% is decent. Above 60% is considered good. Top players maintain 70%+ on their main heroes." },
-    ],
-    relatedSlugs: ["mlbb-win-rate-calculator", "axie-infinity-energy-calculator", "ragnarok-stat-calculator"],
-    references: [],
-  },
-  {
-    slug: "axie-calculator-energy",
-    title: "Axie Calculator Energy – Daily Energy & SLP Optimization",
-    shortTitle: "Axie Energy Calc",
-    metaDescription: "Calculate your Axie Infinity daily energy based on number of Axies owned. Optimize your energy for maximum SLP earnings.",
-    category: "gaming",
-    icon: "Zap",
-    description: "Find out how much daily energy you get in Axie Infinity based on your Axie count. Plan your Arena and Adventure matches for optimal SLP farming.",
-    fields: [
-      { id: "axieCount", label: "Number of Axies Owned", type: "number", placeholder: "e.g. 10", min: 3, max: 100 },
-    ],
-    formula: "Energy = 20 (3-9 Axies) | 40 (10-19) | 60 (20+)",
-    formulaExplanation: "Daily energy allocation: 3-9 Axies = 20 energy, 10-19 Axies = 40 energy, 20+ Axies = 60 energy. Each Arena match uses 1 energy.",
-    exampleCalculation: "With 15 Axies: You get 40 energy/day = 40 Arena matches. With 25 Axies: 60 energy/day = 60 Arena matches.",
-    philippinesContext: "Axie Infinity was a major income source for many Filipinos during 2021. The play-to-earn model allowed thousands of Filipino scholars to earn through daily gameplay.",
-    faqs: [
-      { question: "How many Axies do I need for maximum energy?", answer: "You need 20 or more Axies to get the maximum 60 daily energy." },
-    ],
-    relatedSlugs: ["axie-infinity-energy-calculator", "mlbb-win-rate-calculator", "bnb-to-php-calculator"],
-    references: [],
-  },
-  {
-    slug: "ro-stat-calculator",
-    title: "RO Stat Calculator – Ragnarok Online Build Planner",
-    shortTitle: "RO Stat Planner",
-    metaDescription: "Plan your Ragnarok Online character build with this stat calculator. Optimize STR, AGI, VIT, INT, DEX, LUK for your class.",
-    category: "gaming",
-    icon: "BarChart3",
-    description: "Plan and optimize your Ragnarok Online character build. See how different stat allocations affect your character's ATK, ASPD, HP, and more.",
-    fields: [
-      { id: "str", label: "STR", type: "number", placeholder: "1", min: 1, max: 99, defaultValue: 1 },
-      { id: "agi", label: "AGI", type: "number", placeholder: "1", min: 1, max: 99, defaultValue: 1 },
-      { id: "vit", label: "VIT", type: "number", placeholder: "1", min: 1, max: 99, defaultValue: 1 },
-      { id: "int", label: "INT", type: "number", placeholder: "1", min: 1, max: 99, defaultValue: 1 },
-      { id: "dex", label: "DEX", type: "number", placeholder: "1", min: 1, max: 99, defaultValue: 1 },
-      { id: "luk", label: "LUK", type: "number", placeholder: "1", min: 1, max: 99, defaultValue: 1 },
-    ],
-    formula: "Stat Points = Σ [floor((n-1)/10) + 2] for each stat level",
-    formulaExplanation: "Each stat level costs increasingly more stat points. The cost for raising a stat to level n is floor((n-1)/10) + 2.",
-    exampleCalculation: "Knight build: STR 99, AGI 60, VIT 70, INT 1, DEX 40, LUK 1. Total stat points ≈ 380.",
-    philippinesContext: "Ragnarok Online is iconic in Philippine gaming culture. Filipino RO players are known for their creative builds and active community servers.",
-    faqs: [
-      { question: "What's the best stat build for a Knight?", answer: "A common Knight build is STR 99, AGI 60-80, VIT 50-70 for PvM content." },
-    ],
-    relatedSlugs: ["ragnarok-stat-calculator", "mlbb-win-rate-calculator", "axie-infinity-energy-calculator"],
-    references: [],
-  },
-  {
-    slug: "gwa-calculator-college",
-    title: "GWA Calculator College – Compute Your College GWA",
-    shortTitle: "GWA College",
-    metaDescription: "Free GWA calculator for college students in the Philippines. Compute your General Weighted Average for honors and scholarship applications.",
-    category: "academic",
-    icon: "GraduationCap",
-    description: "Calculate your college GWA (General Weighted Average) for Philippine universities. Essential for determining Latin honors eligibility and scholarship requirements.",
-    fields: [
-      { id: "grades", label: "Enter grades below", type: "text", placeholder: "Use the grade table below" },
-    ],
-    formula: "GWA = Σ(Grade × Units) ÷ Σ(Units)",
-    formulaExplanation: "For each subject, multiply the grade by units. Sum all products and divide by total units.",
-    exampleCalculation: "Math (1.5, 3u) + English (2.0, 3u) + Science (1.75, 5u): GWA = (4.5 + 6.0 + 8.75) ÷ 11 = 1.75",
-    philippinesContext: "GWA is the primary academic metric used in Philippine colleges for Latin honors: Summa Cum Laude (1.0-1.2), Magna Cum Laude (1.21-1.45), Cum Laude (1.46-1.75).",
-    faqs: [
-      { question: "What GWA is needed for Dean's List?", answer: "Typically 1.75 or lower, but this varies by university." },
-    ],
-    relatedSlugs: ["gwa-calculator-philippines", "dlsu-gpa-calculator", "slovin-formula-calculator"],
-    references: [{ title: "CHED", url: "https://ched.gov.ph" }],
-  },
-  {
-    slug: "engine-cc-calculator",
-    title: "Engine CC Calculator – Compute Cubic Centimeters",
-    shortTitle: "Engine CC Calc",
-    metaDescription: "Calculate engine CC (cubic centimeters) from bore, stroke, and cylinders. Free tool for car enthusiasts in the Philippines.",
-    category: "engineering",
-    icon: "Cpu",
-    description: "Calculate your engine's cubic centimeter (CC) displacement. Important for vehicle registration, excise tax, and performance tuning in the Philippines.",
-    fields: [
-      { id: "bore", label: "Bore Diameter (mm)", type: "number", placeholder: "e.g. 86", suffix: "mm", min: 1 },
-      { id: "stroke", label: "Stroke Length (mm)", type: "number", placeholder: "e.g. 86", suffix: "mm", min: 1 },
-      { id: "cylinders", label: "Number of Cylinders", type: "number", placeholder: "e.g. 4", min: 1, max: 16 },
-    ],
-    formula: "CC = (π/4) × Bore² × Stroke × Cylinders ÷ 1000",
-    formulaExplanation: "Engine CC is calculated from the bore area × stroke × number of cylinders, converted from cubic millimeters to cubic centimeters.",
-    exampleCalculation: "Honda Civic 1.5T: Bore 73mm, Stroke 89.5mm, 4 cyl: CC = 1,498 CC ≈ 1.5L",
-    philippinesContext: "Engine CC directly affects vehicle excise tax in the Philippines under the TRAIN Law. Cars above 2,000 CC have significantly higher taxes.",
-    faqs: [
-      { question: "What is CC in a car engine?", answer: "CC (cubic centimeters) measures the total volume of all engine cylinders. Larger CC generally means more power but also higher taxes." },
-    ],
-    relatedSlugs: ["engine-displacement-calculator"],
-    references: [],
-  },
-  {
-    slug: "13th-month-calculator",
-    title: "13th Month Calculator – Quick Bonus Computation",
-    shortTitle: "13th Month Calc",
-    metaDescription: "Quickly calculate your 13th month pay. Free online calculator based on the official DOLE formula for Filipino employees.",
-    category: "salary",
-    icon: "Briefcase",
-    description: "Compute your 13th month pay quickly and easily. Based on DOLE's Presidential Decree No. 851, applicable to all rank-and-file employees in the Philippines.",
-    fields: [
-      { id: "monthlySalary", label: "Monthly Basic Salary (₱)", type: "number", placeholder: "e.g. 25000", prefix: "₱", min: 0 },
-      { id: "monthsWorked", label: "Months Worked This Year", type: "number", placeholder: "e.g. 12", min: 1, max: 12, defaultValue: 12 },
-    ],
-    formula: "13th Month = (Monthly Salary × Months Worked) ÷ 12",
-    formulaExplanation: "Divide the total basic salary earned in the year by 12 to get your 13th month pay.",
-    exampleCalculation: "₱20,000 salary × 10 months = ₱200,000. 13th Month = ₱200,000 ÷ 12 = ₱16,666.67",
-    philippinesContext: "13th month pay is mandatory for all rank-and-file employees. Under the TRAIN Law, the first ₱90,000 of 13th month and other benefits is tax-exempt.",
-    faqs: [
-      { question: "Do contractual employees get 13th month?", answer: "Yes. All rank-and-file employees, including contractual and probationary, are entitled to 13th month pay." },
-    ],
-    relatedSlugs: ["13th-month-pay-calculator-philippines", "night-differential-calculator", "sss-maternity-benefit-calculator"],
-    references: [{ title: "DOLE", url: "https://www.dole.gov.ph" }],
-  },
-  {
-    slug: "sss-maternity-calculator",
-    title: "SSS Maternity Calculator – Estimate Your Benefit",
-    shortTitle: "SSS Maternity Calc",
-    metaDescription: "Calculate your SSS maternity benefit. Free calculator for pregnant Filipino workers to estimate their maternity leave pay.",
-    category: "salary",
-    icon: "Baby",
-    description: "Estimate your SSS maternity benefit based on monthly salary credit. Covers normal delivery, C-section, and solo parent benefits under RA 11210.",
-    fields: [
-      { id: "monthlySalaryCredit", label: "Monthly Salary Credit (₱)", type: "number", placeholder: "e.g. 20000", prefix: "₱", min: 0 },
-      { id: "deliveryType", label: "Delivery Type", type: "select", options: [{ label: "Normal Delivery (105 days)", value: "normal" }, { label: "Cesarean / Miscarriage (105 days)", value: "cesarean" }, { label: "Solo Parent (+15 days)", value: "solo" }] },
-    ],
-    formula: "Daily Allowance = (Monthly Salary Credit × 6) ÷ 180",
-    formulaExplanation: "SSS maternity benefit is based on the average daily salary credit computed from 6 months of contributions.",
-    exampleCalculation: "MSC = ₱25,000. Daily = (₱25,000 × 6) ÷ 180 = ₱833.33. For 105 days: Total = ₱87,500.",
-    philippinesContext: "Under RA 11210 (Expanded Maternity Leave Law), all female workers in the Philippines, including those in the informal economy, are entitled to 105 days of paid maternity leave.",
-    faqs: [
-      { question: "How many SSS contributions do I need?", answer: "You need at least 3 monthly contributions within the 12-month period before delivery." },
-    ],
-    relatedSlugs: ["sss-maternity-benefit-calculator", "13th-month-pay-calculator-philippines", "night-differential-calculator"],
-    references: [{ title: "SSS", url: "https://www.sss.gov.ph" }],
-  },
+  
+  
+  
+  
+  
+  
+  
+  
   {
     slug: "bdo-installment-card-calculator",
     title: "BDO Installment Card Calculator – Credit Card Installment",
@@ -1005,206 +830,16 @@ export const calculators: CalculatorDefinition[] = [
     relatedSlugs: ["bdo-installment-calculator", "bpi-credit-to-cash-calculator", "loan-calculator-philippines"],
     references: [{ title: "BDO", url: "https://www.bdo.com.ph" }],
   },
-  {
-    slug: "how-to-compute-13th-month-pay-calculator",
-    title: "How to Compute 13th Month Pay – Calculator & Guide",
-    shortTitle: "Compute 13th Month",
-    metaDescription: "Learn how to compute 13th month pay in the Philippines with this calculator and step-by-step guide. Based on DOLE PD 851.",
-    category: "salary",
-    icon: "Briefcase",
-    description: "Step-by-step guide with built-in calculator for computing 13th month pay in the Philippines. Follow the official DOLE formula and compute instantly.",
-    fields: [
-      { id: "monthlySalary", label: "Monthly Basic Salary (₱)", type: "number", placeholder: "e.g. 25000", prefix: "₱", min: 0 },
-      { id: "monthsWorked", label: "Months Worked", type: "number", placeholder: "e.g. 12", min: 1, max: 12, defaultValue: 12 },
-    ],
-    formula: "13th Month Pay = (Monthly Salary × Months Worked) ÷ 12",
-    formulaExplanation: "Step 1: Multiply monthly basic salary by months worked. Step 2: Divide by 12. That's your 13th month pay!",
-    exampleCalculation: "₱28,000/month × 12 months = ₱336,000 total. 13th Month = ₱336,000 ÷ 12 = ₱28,000.",
-    philippinesContext: "13th month pay is a mandatory benefit under PD 851. Employers must release it on or before December 24. The first ₱90,000 combined with other benefits is tax-exempt.",
-    faqs: [
-      { question: "Is 13th month pay the same as Christmas bonus?", answer: "No. 13th month pay is mandatory under the law. Christmas bonus is voluntary and given at the employer's discretion." },
-      { question: "Are managers entitled to 13th month pay?", answer: "Managerial employees are not covered by PD 851. Only rank-and-file employees are entitled." },
-    ],
-    relatedSlugs: ["13th-month-pay-calculator-philippines", "13th-month-calculator", "night-differential-calculator"],
-    references: [{ title: "DOLE", url: "https://www.dole.gov.ph" }],
-  },
-  {
-    slug: "how-to-calculate-13th-month",
-    title: "How to Calculate 13th Month Pay – Online Tool",
-    shortTitle: "Calculate 13th Month",
-    metaDescription: "How to calculate 13th month pay in the Philippines. Use this free tool with the official DOLE-based formula.",
-    category: "salary",
-    icon: "Briefcase",
-    description: "Use this tool to learn how to calculate your 13th month pay. Input your salary and months worked to get an instant result based on the DOLE formula.",
-    fields: [
-      { id: "monthlySalary", label: "Monthly Basic Salary (₱)", type: "number", placeholder: "e.g. 25000", prefix: "₱", min: 0 },
-      { id: "monthsWorked", label: "Months Worked This Year", type: "number", placeholder: "e.g. 12", min: 1, max: 12, defaultValue: 12 },
-    ],
-    formula: "13th Month = Total Basic Salary ÷ 12",
-    formulaExplanation: "Total basic salary earned in the calendar year divided by 12 months.",
-    exampleCalculation: "Salary ₱22,000 × 9 months = ₱198,000. 13th Month = ₱198,000 ÷ 12 = ₱16,500.",
-    philippinesContext: "All rank-and-file employees in the Philippines are entitled to 13th month pay, regardless of their designation, employment status, or method of payment.",
-    faqs: [
-      { question: "Is a resigned employee entitled?", answer: "Yes. You receive a prorated 13th month pay based on the months you worked before resigning." },
-    ],
-    relatedSlugs: ["13th-month-pay-calculator-philippines", "13th-month-calculator", "how-to-compute-13th-month-pay-calculator"],
-    references: [{ title: "DOLE", url: "https://www.dole.gov.ph" }],
-  },
-  {
-    slug: "13th-month-pay-calculation-dole",
-    title: "13th Month Pay Calculation DOLE – Official Formula",
-    shortTitle: "DOLE 13th Month",
-    metaDescription: "Official DOLE-based 13th month pay calculation. Free calculator using the formula from Presidential Decree No. 851.",
-    category: "salary",
-    icon: "Briefcase",
-    description: "Calculate 13th month pay using the official DOLE (Department of Labor and Employment) formula under Presidential Decree No. 851.",
-    fields: [
-      { id: "monthlySalary", label: "Monthly Basic Salary (₱)", type: "number", placeholder: "e.g. 25000", prefix: "₱", min: 0 },
-      { id: "monthsWorked", label: "Months Worked", type: "number", placeholder: "e.g. 12", min: 1, max: 12, defaultValue: 12 },
-    ],
-    formula: "13th Month Pay = (Basic Salary × Months) ÷ 12",
-    formulaExplanation: "As per DOLE guidelines: Total basic salary earned during the year ÷ 12. Only basic salary is included — not overtime, allowances, or commissions.",
-    exampleCalculation: "DOLE Example: ₱15,000/month × 12 months = ₱180,000. 13th Month = ₱180,000 ÷ 12 = ₱15,000.",
-    philippinesContext: "DOLE strictly enforces 13th month pay. Employers who fail to pay face penalties. The computation excludes overtime, holiday pay, night differential, and all allowances.",
-    faqs: [
-      { question: "What does DOLE say about 13th month pay deadline?", answer: "DOLE requires employers to release 13th month pay on or before December 24 of each year." },
-    ],
-    relatedSlugs: ["13th-month-pay-calculator-philippines", "13th-month-calculator", "night-differential-calculator"],
-    references: [{ title: "DOLE – PD 851", url: "https://www.dole.gov.ph" }],
-  },
+  
+  
+  
   // INFORMATIONAL/PRODUCT CALCULATORS
-  {
-    slug: "scientific-calculator-price-philippines",
-    title: "Scientific Calculator Price Philippines – Buying Guide 2026",
-    shortTitle: "Scientific Calc Price",
-    metaDescription: "Compare scientific calculator prices in the Philippines. Guide for students on Casio, Canon, and other brands for board exams.",
-    category: "utilities" as any,
-    icon: "Calculator",
-    description: "Compare scientific calculator prices in the Philippines. Find the best calculator for school, college, and PRC board exams. Includes Casio, Canon, and other brands.",
-    fields: [
-      { id: "budget", label: "Your Budget (₱)", type: "number", placeholder: "e.g. 1500", prefix: "₱", min: 0 },
-    ],
-    formula: "Price comparison reference tool",
-    formulaExplanation: "This tool helps you compare calculator prices. Enter your budget to see which calculators fit your price range.",
-    exampleCalculation: "Budget ₱1,500: Casio fx-82ES PLUS (~₱750), Casio fx-991ES PLUS (~₱1,350), Canon F-718SGA (~₱800).",
-    philippinesContext: "Scientific calculators are essential for Filipino students, especially for board exams. PRC (Professional Regulation Commission) only allows specific non-programmable calculators during licensure exams. Popular choices include Casio fx-991ES PLUS and Canon F-718SGA.",
-    faqs: [
-      { question: "What calculator is PRC-approved?", answer: "PRC allows non-programmable scientific calculators. The Casio fx-991ES PLUS and Casio fx-82ES PLUS are commonly approved." },
-      { question: "How much does a scientific calculator cost?", answer: "Prices range from ₱500 to ₱2,000 in the Philippines. The Casio fx-82ES PLUS is around ₱750, while the fx-991ES PLUS is around ₱1,350." },
-      { question: "Where to buy scientific calculators in the Philippines?", answer: "National Bookstore, SM Department Store, Shopee, Lazada, and authorized Casio dealers." },
-    ],
-    relatedSlugs: ["prc-approved-calculator-guide", "canon-scientific-calculator-guide", "casio-calculator-watch-guide"],
-    references: [],
-  },
-  {
-    slug: "huawei-code-calculator",
-    title: "Huawei Code Calculator – Unlock & Reset Code Tool",
-    shortTitle: "Huawei Code Calc",
-    metaDescription: "Information about Huawei code calculators for unlock and reset codes. Guide for Filipino Huawei phone users.",
-    category: "utilities" as any,
-    icon: "Cpu",
-    description: "Information guide about Huawei code calculators used for generating unlock and reset codes. Note: This is an informational tool — always use official Huawei support channels.",
-    fields: [
-      { id: "imei", label: "IMEI Number (15 digits)", type: "text", placeholder: "e.g. 123456789012345" },
-    ],
-    formula: "IMEI-based algorithm (informational only)",
-    formulaExplanation: "Huawei unlock codes are generated using IMEI-based algorithms. For legitimate unlocking, contact Huawei support or your carrier directly.",
-    exampleCalculation: "This tool provides information only. For actual unlock codes, contact Huawei Philippines support at their official hotline or visit a Huawei service center.",
-    philippinesContext: "Huawei phones are popular in the Philippines. If you need to unlock your Huawei device, visit an authorized Huawei service center or contact your carrier (Globe, Smart, DITO).",
-    faqs: [
-      { question: "How do I unlock my Huawei phone?", answer: "Contact your carrier (Globe/Smart) for network unlock, or visit a Huawei service center for device unlocking." },
-      { question: "Is it safe to use online Huawei code calculators?", answer: "Be cautious with third-party tools. Always use official Huawei channels or authorized service centers." },
-    ],
-    relatedSlugs: ["excel-formula-age-calculator"],
-    references: [],
-  },
-  {
-    slug: "prc-approved-calculator-guide",
-    title: "PRC Approved Calculator List Philippines – Board Exam Guide",
-    shortTitle: "PRC Approved Calc",
-    metaDescription: "List of PRC-approved calculators for Philippine board exams. Know which scientific calculators are allowed by the Professional Regulation Commission.",
-    category: "utilities" as any,
-    icon: "Calculator",
-    description: "Complete guide to PRC-approved calculators for Philippine licensure and board exams. Know which non-programmable calculators are allowed before your exam day.",
-    fields: [
-      { id: "examType", label: "Board Exam Type", type: "select", options: [{ label: "Engineering (CE, ECE, EE, ME)", value: "engineering" }, { label: "Accountancy (CPA)", value: "cpa" }, { label: "Architecture", value: "architecture" }, { label: "Other Board Exams", value: "other" }] },
-    ],
-    formula: "PRC requirement: Non-programmable scientific calculator only",
-    formulaExplanation: "PRC requires that all calculators used during board exams must be non-programmable. Programmable and graphing calculators are NOT allowed.",
-    exampleCalculation: "PRC-Approved: Casio fx-82ES PLUS (₱750), Casio fx-991ES PLUS (₱1,350), Canon F-718SGA (₱800). NOT Allowed: Casio fx-991EX (programmable), TI-84 (graphing).",
-    philippinesContext: "The Professional Regulation Commission (PRC) strictly enforces calculator policies during board exams. Using a non-approved calculator can result in confiscation or exam invalidation.",
-    faqs: [
-      { question: "Can I use Casio fx-991ES PLUS for board exams?", answer: "Yes, the Casio fx-991ES PLUS is one of the most commonly approved non-programmable calculators for PRC board exams." },
-      { question: "What happens if I bring a programmable calculator?", answer: "PRC examiners may confiscate it. You may be asked to take the exam without a calculator." },
-    ],
-    relatedSlugs: ["scientific-calculator-price-philippines", "canon-scientific-calculator-guide"],
-    references: [{ title: "PRC", url: "https://www.prc.gov.ph" }],
-  },
-  {
-    slug: "tagalog-of-calculator",
-    title: "Tagalog of Calculator – Filipino Translation & Terms",
-    shortTitle: "Tagalog: Calculator",
-    metaDescription: "What is the Tagalog of calculator? Learn the Filipino translation and related math terms in Tagalog.",
-    category: "utilities" as any,
-    icon: "Calculator",
-    description: "Learn the Tagalog (Filipino) translation of 'calculator' and other common math terms. A helpful reference for students and educators in the Philippines.",
-    fields: [
-      { id: "term", label: "English Math Term", type: "select", options: [{ label: "Calculator", value: "calculator" }, { label: "Mathematics", value: "math" }, { label: "Addition", value: "addition" }, { label: "Subtraction", value: "subtraction" }] },
-    ],
-    formula: "Calculator = Pantaya / Kalkulador (Filipino)",
-    formulaExplanation: "In Filipino (Tagalog), 'calculator' can be translated as 'kalkulador' (borrowed from Spanish/English) or the more formal 'pantaya' (from root word 'taya' meaning to compute).",
-    exampleCalculation: "Calculator → Kalkulador / Pantaya. Mathematics → Matematika. Addition → Pagdaragdag. Subtraction → Pagbabawas. Multiplication → Pagpaparami. Division → Paghahati.",
-    philippinesContext: "Filipino (based on Tagalog) is the national language of the Philippines alongside English. In schools, math is typically taught in English, but understanding Tagalog math terms helps in bilingual instruction.",
-    faqs: [
-      { question: "What is the Tagalog of calculator?", answer: "The Tagalog of calculator is 'kalkulador' (commonly used) or 'pantaya' (more formal/traditional Filipino term)." },
-      { question: "Is 'kalkulador' proper Tagalog?", answer: "Yes. 'Kalkulador' is an accepted Filipino word borrowed from Spanish 'calculador'. It appears in Filipino dictionaries." },
-    ],
-    relatedSlugs: ["scientific-calculator-price-philippines", "gwa-calculator-philippines"],
-    references: [],
-  },
-  {
-    slug: "canon-scientific-calculator-guide",
-    title: "Canon Scientific Calculator Philippines – Models & Prices",
-    shortTitle: "Canon Sci Calc",
-    metaDescription: "Compare Canon scientific calculator models and prices in the Philippines. Find the best Canon calculator for school and board exams.",
-    category: "utilities" as any,
-    icon: "Calculator",
-    description: "Guide to Canon scientific calculators available in the Philippines. Compare models, features, and prices for school and PRC board exam use.",
-    fields: [
-      { id: "budget", label: "Your Budget (₱)", type: "number", placeholder: "e.g. 1000", prefix: "₱", min: 0 },
-    ],
-    formula: "Canon calculator price comparison tool",
-    formulaExplanation: "Canon offers several scientific calculator models suitable for Filipino students. This guide compares prices and features.",
-    exampleCalculation: "Canon F-718SGA (~₱800): 264 functions, PRC-approved. Canon F-789SGA (~₱1,200): 605 functions. Canon F-715SG (~₱600): Basic model.",
-    philippinesContext: "Canon is a trusted brand for scientific calculators in the Philippines. The Canon F-718SGA is particularly popular because it's PRC-approved and affordable for Filipino students.",
-    faqs: [
-      { question: "Is Canon F-718SGA PRC-approved?", answer: "Yes, the Canon F-718SGA is non-programmable and generally allowed for PRC board exams." },
-    ],
-    relatedSlugs: ["scientific-calculator-price-philippines", "prc-approved-calculator-guide", "casio-calculator-watch-guide"],
-    references: [],
-  },
-  {
-    slug: "casio-calculator-watch-guide",
-    title: "Casio Calculator Watch Philippines – Models & Prices",
-    shortTitle: "Casio Calc Watch",
-    metaDescription: "Guide to Casio calculator watches in the Philippines. Compare models, prices, and features of the iconic Casio calculator watch.",
-    category: "utilities" as any,
-    icon: "Calculator",
-    description: "Explore Casio calculator watches available in the Philippines. The iconic Casio CA-53W and other models with built-in calculators.",
-    fields: [
-      { id: "budget", label: "Your Budget (₱)", type: "number", placeholder: "e.g. 2000", prefix: "₱", min: 0 },
-    ],
-    formula: "Casio watch price reference",
-    formulaExplanation: "This is a guide to Casio calculator watch models and their prices in the Philippines.",
-    exampleCalculation: "Casio CA-53W-1 (~₱1,500): Classic calculator watch. Casio DBC-32-1A (~₱3,500): Data bank with calculator. Casio CA-53WF (~₱1,800): Color variant.",
-    philippinesContext: "Casio calculator watches are popular accessories in the Philippines. They're available at SM Department Store, Casio outlets, Lazada, and Shopee. Prices range from ₱1,500 to ₱4,000.",
-    faqs: [
-      { question: "Where to buy Casio calculator watch in the Philippines?", answer: "Available at SM Department Store, Watch Republic, Lazada, Shopee, and authorized Casio dealers." },
-      { question: "Is the Casio calculator watch water resistant?", answer: "The CA-53W has basic water resistance (WR) but is not suitable for swimming." },
-    ],
-    relatedSlugs: ["scientific-calculator-price-philippines", "canon-scientific-calculator-guide"],
-    references: [],
-  },
+  
+  
+  
+  
+  
+  
   {
     slug: "k-map-calculator",
     title: "K-Map Calculator – Karnaugh Map Solver Online",
@@ -1276,28 +911,7 @@ export const calculators: CalculatorDefinition[] = [
     relatedSlugs: ["metrobank-car-loan-calculator", "psbank-car-loan-calculator", "loan-calculator-philippines", "rcbc-car-loan-calculator"],
     references: [{ title: "Metrobank", url: "https://www.metrobank.com.ph" }],
   },
-  {
-    slug: "non-programmable-calculator-guide",
-    title: "Non-Programmable Calculator Guide Philippines – PRC & Schools",
-    shortTitle: "Non-Programmable Calc",
-    metaDescription: "Guide to non-programmable calculators allowed in Philippine board exams and schools. PRC-approved models and prices.",
-    category: "utilities" as any,
-    icon: "Calculator",
-    description: "Complete guide to non-programmable calculators for Philippine board exams and schools. Know which models are PRC-approved and where to buy them.",
-    fields: [
-      { id: "budget", label: "Your Budget (₱)", type: "number", placeholder: "e.g. 1500", prefix: "₱", min: 0 },
-    ],
-    formula: "Non-programmable calculator buying guide",
-    formulaExplanation: "PRC requires non-programmable scientific calculators for all board exams. This guide helps you choose the right one.",
-    exampleCalculation: "Under ₱800: Casio fx-82ES PLUS. Under ₱1,500: Casio fx-991ES PLUS. Budget: Canon F-718SGA (~₱800).",
-    philippinesContext: "The PRC (Professional Regulation Commission) only allows non-programmable scientific calculators during licensure examinations. Using a programmable calculator may result in confiscation.",
-    faqs: [
-      { question: "How do I know if my calculator is non-programmable?", answer: "Non-programmable calculators cannot store text or programs. Check if it has a 'PROG' or 'PRGM' button — if it does, it's programmable." },
-      { question: "Is Casio fx-991ES PLUS non-programmable?", answer: "Yes, the fx-991ES PLUS is non-programmable and PRC-approved for board exams." },
-    ],
-    relatedSlugs: ["prc-approved-calculator-guide", "scientific-calculator-price-philippines", "canon-scientific-calculator-guide"],
-    references: [{ title: "PRC", url: "https://www.prc.gov.ph" }],
-  },
+  
   {
     slug: "paracetamol-dosage-calculator",
     title: "Paracetamol Dosage Calculator – Safe Dose by Weight & Age",
@@ -1482,27 +1096,7 @@ export const calculators: CalculatorDefinition[] = [
     relatedSlugs: ["loan-calculator-philippines", "cimb-bank-personal-loan-calculator", "home-credit-interest-rate-calculator"],
     references: [{ title: "EastWest Bank", url: "https://www.eastwestbanker.com" }],
   },
-  {
-    slug: "general-weighted-average-calculator",
-    title: "General Weighted Average Calculator – GWA Tool for Students",
-    shortTitle: "GWA Calculator",
-    metaDescription: "Calculate your General Weighted Average (GWA) easily. Free online GWA calculator for Filipino students.",
-    category: "academic",
-    icon: "GraduationCap",
-    description: "Compute your General Weighted Average (GWA) by entering your grades and units. Works for all Philippine colleges and universities.",
-    fields: [
-      { id: "grades", label: "Enter grades below", type: "text", placeholder: "Use the grade table below" },
-    ],
-    formula: "GWA = Σ(Grade × Units) ÷ Σ(Units)",
-    formulaExplanation: "Multiply each grade by its corresponding units, sum all products, then divide by total units.",
-    exampleCalculation: "Math 1.25 (3u) + Eng 1.50 (3u) + Sci 2.00 (5u): GWA = (3.75 + 4.50 + 10.00) ÷ 11 = 1.66",
-    philippinesContext: "GWA is the standard academic metric in Philippine higher education. It's used for honors, scholarships, and graduate school admissions.",
-    faqs: [
-      { question: "Is GWA the same as GPA?", answer: "Not exactly. GWA uses the Philippine grading system (1.0-5.0) while GPA typically uses 0.0-4.0." },
-    ],
-    relatedSlugs: ["gwa-calculator-philippines", "gwa-calculator-college", "dlsu-gpa-calculator", "gpa-calculator-philippines"],
-    references: [{ title: "CHED", url: "https://ched.gov.ph" }],
-  },
+  
   {
     slug: "home-credit-interest-rate-calculator",
     title: "Home Credit Interest Rate Calculator Philippines",
@@ -1728,7 +1322,7 @@ export const calculators: CalculatorDefinition[] = [
     faqs: [
       { question: "What is bore and stroke?", answer: "Bore is the cylinder diameter. Stroke is the distance the piston travels. Together they determine engine displacement." },
     ],
-    relatedSlugs: ["engine-displacement-calculator", "engine-cc-calculator"],
+    relatedSlugs: ["engine-displacement-calculator", ],
     references: [],
   },
   {
@@ -1752,32 +1346,10 @@ export const calculators: CalculatorDefinition[] = [
       { question: "How long is a dog's pregnancy?", answer: "Average is 63 days (about 9 weeks). Range is 58-68 days from breeding." },
       { question: "What are early signs of dog pregnancy?", answer: "Decreased appetite, nipple enlargement, and behavioral changes around weeks 2-3." },
     ],
-    relatedSlugs: ["canine-pregnancy-calculator"],
+    relatedSlugs: [],
     references: [],
   },
-  {
-    slug: "canine-pregnancy-calculator",
-    title: "Canine Pregnancy Calculator – Whelping Date Estimator",
-    shortTitle: "Canine Pregnancy",
-    metaDescription: "Estimate your canine's whelping date. Free pregnancy calculator for dog breeders and pet owners in the Philippines.",
-    category: "health",
-    icon: "Heart",
-    description: "Calculate your canine's expected whelping date based on the mating date. Includes pregnancy milestones and tips for Filipino pet owners.",
-    fields: [
-      { id: "breedingMonth", label: "Mating Month", type: "number", placeholder: "e.g. 3", min: 1, max: 12 },
-      { id: "breedingDay", label: "Mating Day", type: "number", placeholder: "e.g. 15", min: 1, max: 31 },
-      { id: "breedingYear", label: "Mating Year", type: "number", placeholder: "e.g. 2026", min: 2020, max: 2030 },
-    ],
-    formula: "Whelping Date = Mating Date + 63 days",
-    formulaExplanation: "Canine gestation averages 63 days. First vet visit should be around day 25-30 for confirmation.",
-    exampleCalculation: "Mating: March 1, 2026. Expected whelping: May 3, 2026.",
-    philippinesContext: "Filipino pet owners should prepare whelping supplies and consult a veterinarian during pregnancy. Many vet clinics in the Philippines offer affordable prenatal checkups for dogs.",
-    faqs: [
-      { question: "When should I take my pregnant dog to the vet?", answer: "Visit a vet around day 25-30 for pregnancy confirmation via ultrasound." },
-    ],
-    relatedSlugs: ["dog-pregnancy-calculator"],
-    references: [],
-  },
+  
   {
     slug: "gaussian-elimination-calculator",
     title: "Gaussian Elimination Calculator – Solve Linear Systems",
@@ -1804,27 +1376,7 @@ export const calculators: CalculatorDefinition[] = [
     relatedSlugs: ["k-map-calculator", "differential-equation-calculator", "cochran-formula-calculator"],
     references: [],
   },
-  {
-    slug: "gpa-calculator-philippines",
-    title: "GPA Calculator Philippines – Grade Point Average Tool",
-    shortTitle: "GPA Calculator PH",
-    metaDescription: "Calculate your GPA for Philippine universities. Free grade point average calculator for Filipino students.",
-    category: "academic",
-    icon: "GraduationCap",
-    description: "Calculate your Grade Point Average (GPA) for Philippine universities. Supports both 1.0-5.0 and 4.0 grading scales used in different schools.",
-    fields: [
-      { id: "grades", label: "Enter grades below", type: "text", placeholder: "Use the grade table below" },
-    ],
-    formula: "GPA = Σ(Grade Point × Units) ÷ Σ(Units)",
-    formulaExplanation: "Multiply each course's grade point by its credit units, sum all, then divide by total units.",
-    exampleCalculation: "Using 4.0 scale: Course A (3.5, 3u) + Course B (3.0, 3u) + Course C (4.0, 3u): GPA = (10.5 + 9.0 + 12.0) ÷ 9 = 3.5",
-    philippinesContext: "Philippine universities use different grading scales. Some use 1.0-5.0 (where 1.0 is highest), others use 4.0 scale (where 4.0 is highest). Check your school's specific grading system.",
-    faqs: [
-      { question: "What grading system does my school use?", answer: "Most state universities use 1.0-5.0. Some private schools like DLSU use 0.0-4.0. Check with your registrar." },
-    ],
-    relatedSlugs: ["gwa-calculator-philippines", "dlsu-gpa-calculator", "general-weighted-average-calculator"],
-    references: [{ title: "CHED", url: "https://ched.gov.ph" }],
-  },
+  
   // ASTROLOGY
   {
     slug: "sun-moon-rising-sign-calculator",
