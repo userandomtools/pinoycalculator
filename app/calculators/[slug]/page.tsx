@@ -437,7 +437,7 @@ export default async function CalculatorSlugPage({
             <p>
               <strong>Disclaimer:</strong> This calculator provides mathematical estimates based on the formulas and variables provided. It is designed for informational and educational purposes only and should not be considered professional financial, legal, medical, or engineering advice. Always consult with a qualified professional or official government agency (e.g., BIR, SSS, Pag-IBIG) before making significant decisions based on these calculations.
             </p>
-          </section
+          </section>
         </div>
       </div>
     </>
