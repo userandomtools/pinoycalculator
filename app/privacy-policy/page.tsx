@@ -38,7 +38,19 @@ const PrivacyPolicy = () => (
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-foreground mb-3">4. Third-Party Services</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-3">4. Google AdSense \u0026 Advertising</h2>
+        <p>
+          We use third-party advertising companies to serve ads when you visit our Website. These companies may use information about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
+        </p>
+        <ul className="list-disc pl-6 mt-3 space-y-2">
+          <li>Google, as a third-party vendor, uses cookies to serve ads on Pinoy Calculator.</li>
+          <li>Google's use of the advertising cookie enables it and its partners to serve ads to our users based on their visit to our sites and/or other sites on the Internet.</li>
+          <li>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Ads Settings</a>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold text-foreground mb-3">5. Third-Party Services</h2>
         <p>
           Our website may contain links to government portals (.gov.ph) or educational resources (.edu.ph). We are not responsible for the privacy practices or content of these external sites. We encourage you to read the privacy statements of any site you visit.
         </p>

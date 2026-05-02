@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mail, MessageSquare, Clock, Send, Calculator } from "lucide-react";
+import { Mail, MessageSquare, Clock, Send, Calculator, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -55,29 +55,58 @@ const Contact = () => (
       </Card>
     </div>
 
-    <div className="max-w-3xl mx-auto rounded-3xl border border-border bg-muted/30 p-8 md:p-12">
-      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-foreground">
-        <Calculator className="h-6 w-6 text-primary" />
-        Request a Specific Calculator
-      </h2>
-      <div className="space-y-4 text-muted-foreground leading-relaxed">
-        <p>
-          Is there a specific calculation you perform often that isn't on our site? Whether it's for a niche hobby, a specific Philippine tax rule, or a local business need, we want to build it for you.
-        </p>
-        <p>
-          When requesting a tool, please include:
-        </p>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>The name of the calculation/tool</li>
-          <li>The formula or official government link (if applicable)</li>
-          <li>A brief explanation of how you intend to use it</li>
-        </ul>
-        <div className="pt-4">
-          <Button asChild className="gap-2 rounded-xl">
-             <a href="mailto:hello@pinoycalculator.com">
-               Email Your Request <Send className="h-4 w-4" />
-             </a>
-          </Button>
+    <div className="grid md:grid-cols-2 gap-6 mb-12">
+      <div className="rounded-3xl border border-border bg-muted/30 p-8">
+        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-foreground">
+          <Calculator className="h-6 w-6 text-primary" />
+          Request a Specific Calculator
+        </h2>
+        <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
+          <p>
+            Is there a specific calculation you perform often that isn't on our site? Whether it's for a niche hobby, a specific Philippine tax rule, or a local business need, we want to build it for you.
+          </p>
+          <p>
+            When requesting a tool, please include:
+          </p>
+          <ul className="list-disc pl-6 space-y-2 font-medium text-foreground">
+            <li>The name of the calculation/tool</li>
+            <li>The formula or official government link (if applicable)</li>
+            <li>A brief explanation of how you intend to use it</li>
+          </ul>
+          <div className="pt-4">
+            <Button asChild className="gap-2 rounded-xl w-full sm:w-auto">
+               <a href="mailto:hello@pinoycalculator.com">
+                 Email Your Request <Send className="h-4 w-4" />
+               </a>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-3xl border border-primary/20 bg-primary/5 p-8">
+        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-foreground">
+          <Mail className="h-6 w-6 text-primary" />
+          Media & Partnerships
+        </h2>
+        <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
+          <p>
+            Pinoy Calculator is one of the fastest-growing financial utility platforms in the Philippines. We are open to collaboration with fintech companies, educational institutions, and financial services that align with our mission of providing free, accurate tools to Filipinos.
+          </p>
+          <p>
+            <strong>Opportunities:</strong>
+          </p>
+          <ul className="list-disc pl-6 space-y-2 font-medium text-foreground">
+            <li>Sponsored Calculator integrations</li>
+            <li>Display Advertising & Branded Content</li>
+            <li>API Licensing for financial institutions</li>
+          </ul>
+          <div className="pt-4">
+            <Button asChild variant="secondary" className="gap-2 rounded-xl w-full sm:w-auto border-primary/20">
+               <a href="mailto:partnerships@pinoycalculator.com">
+                 Partnership Inquiry <ArrowRight className="h-4 w-4" />
+               </a>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

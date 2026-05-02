@@ -47,9 +47,16 @@ const TermsOfService = () => (
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-foreground mb-3">5. Limitation of Liability</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-3">5. Third-Party Advertisements</h2>
         <p>
-          Pinoy Calculator and its developers shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our tools, or from any errors or omissions in the content.
+          We use third-party advertising companies, such as Google AdSense, to serve ads when you visit our Website. These companies may use cookies and web beacons to collect data in the course of ads being served. Pinoy Calculator has no access to or control over these cookies that are used by third-party advertisers.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold text-foreground mb-3">6. Limitation of Liability</h2>
+        <p>
+          Pinoy Calculator and its developers shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our tools, or from any errors or omissions in the content. <strong>Use of the calculators is at your own risk.</strong>
         </p>
       </section>
 

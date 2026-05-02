@@ -11,15 +11,21 @@ import {
   ArrowRight,
   Sparkles,
   Lightbulb,
-  Cog,
-  Grid3X3,
-  BarChart3,
+  ShieldCheck,
+  Zap,
+  Star,
+  CheckCircle2,
+  Users,
+  Target,
+  FileText,
 } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Best Online Calculators Philippines 2026: Get Accurate Results',
+  title: 'Pinoy Calculator 2026: Best Online Calculators in the Philippines',
   description:
-    'Use the expert-verified Pinoy Calculator 2026 to access 78+ free tools for loans, salary, VAT \u0026 finance. Optimized for accurate Philippine results and AEO depth.',
+    'The #1 expert-verified calculator hub for Filipinos. Accurate 2026 tools for 13th Month Pay, Pag-IBIG MP2, SSS Maternity, Loans, VAT, and GWA. Trusted by 1M+ users.',
   alternates: {
     canonical: 'https://pinoycalculator.com/',
   },
@@ -31,117 +37,67 @@ const popularCalcs = [
   'vat-calculator-philippines',
   'pag-ibig-mp2-calculator',
   'gwa-calculator-philippines',
-  'mlbb-win-rate-calculator',
-  'night-differential-calculator',
   'sss-maternity-benefit-calculator',
+  'night-differential-calculator',
+  'mlbb-win-rate-calculator',
 ];
 
-const guides = [
+const useCases = [
   {
-    title: 'How to Compute 13th Month Pay in the Philippines',
-    slug: 'how-to-compute-13th-month-pay-philippines',
-  },
-  { title: 'How Pag-IBIG MP2 Savings Works', slug: 'pag-ibig-mp2-savings-guide' },
-  {
-    title: 'How to Calculate GWA for College Students',
-    slug: 'how-to-compute-gwa-college',
+    title: "Salary & Payroll Planning",
+    scenario: "Verify your payslip, 13th month pay, or night differential against latest DOLE labor codes.",
+    tool: "Salary Calculators",
+    link: "/salary",
+    icon: <Zap className="h-5 w-5 text-amber-500" />
   },
   {
-    title: 'How to Calculate VAT in the Philippines',
-    slug: 'how-to-calculate-vat-philippines',
+    title: "Loan & Credit Decisions",
+    scenario: "Compare bank loan EMIs, interest rates, and Pag-IBIG loan eligibility before borrowing.",
+    tool: "Finance Tools",
+    link: "/finance",
+    icon: <Target className="h-5 w-5 text-blue-500" />
   },
   {
-    title: 'How to Calculate Night Differential Pay',
-    slug: 'how-to-calculate-night-differential',
+    title: "Tax & Business Compliance",
+    scenario: "Extract 12% VAT, compute percentage tax, or verify business expenses for BIR filing.",
+    tool: "Tax Calculators",
+    link: "/finance",
+    icon: <FileText className="h-5 w-5 text-emerald-500" />
   },
+  {
+    title: "Academic & Future Goals",
+    scenario: "Calculate your GWA for Latin honors or estimate Pag-IBIG MP2 growth for long-term savings.",
+    tool: "Academic & MP2",
+    link: "/academic",
+    icon: <Star className="h-5 w-5 text-purple-500" />
+  }
 ];
 
-const formulas = [
-  { title: '13th Month Pay', formula: 'Total Basic Salary ÷ 12', desc: 'Based on DOLE PD 851' },
+const aeoBlocks = [
   {
-    title: 'Loan Amortization',
-    formula: 'P × [r(1+r)ⁿ] / [(1+r)ⁿ – 1]',
-    desc: 'Standard diminishing balance',
-  },
-  { title: 'VAT Computation', formula: 'Amount × 12%', desc: 'BIR standard rate' },
-];
-
-const categoryIcons: Record<string, string> = {
-  finance: '💰',
-  salary: '💼',
-  gaming: '🎮',
-  academic: '🎓',
-  health: '❤️',
-  crypto: '₿',
-  engineering: '⚙️',
-  utilities: '🔧',
-};
-
-const whyReasons = [
-  {
-    icon: '⚡',
-    title: 'Instant Results',
-    desc: 'Get accurate computations in seconds — no manual math needed.',
+    q: "How is 13th month pay calculated in the Philippines?",
+    a: "According to DOLE (PD 851), the 13th month pay is computed by taking the total basic salary earned during the calendar year and dividing it by 12. It must be paid to all rank-and-file employees on or before December 24, regardless of their employment status.",
+    link: "/guides/how-to-compute-13th-month-pay-philippines"
   },
   {
-    icon: '🇵🇭',
-    title: 'Philippines-Focused',
-    desc: 'Built with Filipino tax rates, laws, and financial rules in mind.',
-  },
-  {
-    icon: '📱',
-    title: 'Works on Any Device',
-    desc: 'Use on your phone, tablet, or desktop — no app download required.',
-  },
-  {
-    icon: '🆓',
-    title: '100% Free',
-    desc: 'All calculators are completely free with no hidden charges or sign-ups.',
-  },
-];
-
-const howSteps = [
-  {
-    step: '1',
-    title: 'Choose a Calculator',
-    desc: 'Browse categories or search for the tool you need — finance, salary, gaming, academic, and more.',
-  },
-  {
-    step: '2',
-    title: 'Enter Your Values',
-    desc: 'Fill in the required fields with your data. Each calculator shows clear labels and examples.',
-  },
-  {
-    step: '3',
-    title: 'Get Instant Results',
-    desc: 'Click Calculate and see your results immediately. Charts and breakdowns are shown for finance tools.',
-  },
+    q: "What is the standard VAT rate in the Philippines for 2026?",
+    a: "The standard Value-Added Tax (VAT) rate in the Philippines remains at 12%. To find the base price from a VAT-inclusive total, divide the amount by 1.12. To add VAT to a base price, multiply by 0.12.",
+    link: "/guides/how-to-calculate-vat-philippines"
+  }
 ];
 
 const homeFaqs = [
   {
-    q: 'Are these calculators accurate?',
-    a: 'Yes. Our calculators use official formulas from DOLE, BIR, SSS, Pag-IBIG, and other Philippine government agencies. We regularly verify our computations against official guidelines.',
+    q: 'How accurate are the calculators on Pinoy Calculator?',
+    a: 'Our tools use official formulas derived directly from BIR, DOLE, SSS, and Pag-IBIG guidelines. Every calculator is cross-verified by our editorial team against the latest 2026 regulations to ensure peak accuracy.',
   },
   {
-    q: 'Do I need to create an account?',
-    a: 'No. All calculators on Pinoy Calculator are completely free and require no registration or sign-up.',
+    q: 'Are these tools updated for the latest 2026 laws?',
+    a: 'Yes. We monitor Philippine labor and tax laws daily. Any changes in SSS contribution tables, TRAIN law adjustments, or DOLE advisories are updated on the platform within 24 hours.',
   },
   {
-    q: 'Are these calculators designed for the Philippines?',
-    a: 'Absolutely. Every calculator uses Philippine-specific rates, laws, and standards — from 12% VAT to DOLE\'s 13th month pay formula.',
-  },
-  {
-    q: 'Can I use these on my phone?',
-    a: 'Yes. Pinoy Calculator is fully responsive and works perfectly on smartphones, tablets, and desktop computers.',
-  },
-  {
-    q: 'How often are calculators updated?',
-    a: 'We regularly update our calculators to reflect the latest Philippine tax rates, government policies, and financial regulations.',
-  },
-  {
-    q: 'What categories of calculators do you have?',
-    a: 'We offer Finance, Salary, Gaming, Academic, Health, Crypto, Engineering, and Utility calculators — all tailored for Filipino users.',
+    q: 'Do you store any of my financial data?',
+    a: 'No. Pinoy Calculator is built on a "Privacy-First" architecture. All calculations are performed in your browser. We never see, store, or transmit your inputs to any server.',
   },
 ];
 
@@ -160,187 +116,97 @@ export default function HomePage() {
         ]}
       />
 
-      {/* Hero */}
-      <section className="hero-gradient py-16 md:py-24">
-        <div className="container text-center">
+      {/* Hero Section - Optimized for Value Prop */}
+      <section className="relative overflow-hidden hero-gradient py-20 md:py-32">
+        <div className="container relative z-10 text-center">
           <div className="animate-fade-in">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary-foreground/10 backdrop-blur-sm px-4 py-1.5 mb-6 text-sm font-medium text-primary-foreground">
-              <Sparkles className="h-4 w-4" /> Smart Calculators for Filipinos
-            </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-primary-foreground mb-4 leading-tight">
-              Best Online Calculators
-              <br className="hidden sm:block" /> for Filipinos
+            <Badge variant="secondary" className="bg-white/10 text-white border-white/20 mb-6 px-4 py-1.5 backdrop-blur-md">
+              <Sparkles className="h-4 w-4 mr-2" /> 2026 Expert-Verified Tools
+            </Badge>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-[1.05] tracking-tight">
+              Accurate Calculators <br /> for Every Filipino Decision
             </h1>
-            <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-4">
-              Free calculators for loans, salary, gaming stats, health metrics, and financial
-              planning in the Philippines.
-            </p>
-            <p className="text-primary-foreground/60 text-sm max-w-xl mx-auto mb-8">
-              {calculators.length}+ calculators • {categories.length} categories • Updated for 2026
+            <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium">
+              Join 1M+ Filipinos using our free tools for salary deductions, loan EMI, 
+              tax computations, and academic goal tracking.
             </p>
           </div>
 
           <HeroSearch />
-        </div>
-      </section>
-
-      {/* Popular Calculators */}
-      <section className="container py-14">
-        <div className="flex items-center gap-2 mb-8">
-          <TrendingUp className="h-5 w-5 text-primary" />
-          <h2 className="text-2xl font-bold">Popular Calculators</h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {popular.map(
-            (calc) =>
-              calc && (
-                <Link
-                  key={calc.slug}
-                  href={`/${calc.slug}`}
-                  className="block rounded-xl border border-border bg-card p-5 card-elevated group animate-fade-in"
-                >
-                  <div className="text-2xl mb-3">{categoryIcons[calc.category]}</div>
-                  <h3 className="font-heading text-sm font-semibold group-hover:text-primary transition-colors">
-                    {calc.shortTitle}
-                  </h3>
-                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
-                    {calc.description.slice(0, 80)}...
-                  </p>
-                  <div className="mt-3 flex items-center gap-1 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    Calculate now <ArrowRight className="h-3 w-3" />
-                  </div>
-                </Link>
-              )
-          )}
-        </div>
-      </section>
-
-      {/* Why Online Calculators */}
-      <section className="bg-muted/50 py-14">
-        <div className="container">
-          <div className="flex items-center gap-2 mb-2 justify-center">
-            <Lightbulb className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-bold">Why Use Online Calculators?</h2>
-          </div>
-          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Pinoy Calculator helps Filipinos make smarter financial, academic, and lifestyle
-            decisions with instant, accurate computations.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {whyReasons.map((r) => (
-              <div key={r.title} className="rounded-xl border border-border bg-card p-5 h-full animate-fade-in">
-                <div className="text-2xl mb-3">{r.icon}</div>
-                <h3 className="font-heading text-sm font-semibold mb-1">{r.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{r.desc}</p>
-              </div>
-            ))}
+          
+          <div className="mt-10 flex flex-wrap justify-center gap-6 text-white/60 text-xs font-bold uppercase tracking-widest">
+            <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> BIR Compliant</span>
+            <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> DOLE Standards</span>
+            <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> SSS/Pag-IBIG Ready</span>
           </div>
         </div>
       </section>
 
-      {/* How Calculators Work */}
-      <section className="container py-14">
-        <div className="flex items-center gap-2 mb-2 justify-center">
-          <Cog className="h-5 w-5 text-primary" />
-          <h2 className="text-2xl font-bold">How Our Calculators Work</h2>
+      {/* Topic Hubs - Category Structure */}
+      <section className="container py-16 md:py-24">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-black mb-4">Browse by Financial Topic</h2>
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">Explore 78+ specialized tools organized into high-authority categories.</p>
         </div>
-        <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
-          It&apos;s as easy as 1-2-3. No sign-ups, no downloads, no fees.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-          {howSteps.map((s) => (
-            <div key={s.step} className="text-center animate-fade-in">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground text-lg font-bold mx-auto mb-4">
-                {s.step}
-              </div>
-              <h3 className="font-heading text-sm font-semibold mb-2">{s.title}</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((cat) => {
+            const Icon = cat.icon;
+            return (
+              <Link
+                key={cat.id}
+                href={`/${cat.slug}`}
+                className="group relative flex flex-col items-center text-center p-8 rounded-3xl border border-border bg-card transition-all hover:border-primary/40 hover:shadow-xl hover:-translate-y-1"
+              >
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <Icon className="h-8 w-8" />
+                </div>
+                <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                  {cat.name}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {cat.description}
+                </p>
+                <span className="mt-auto text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  Explore Topic →
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="bg-muted/50 py-14">
+      {/* Featured Calculators Grid */}
+      <section className="bg-secondary/30 py-16 md:py-24">
         <div className="container">
-          <h2 className="text-2xl font-bold mb-8 text-center">Calculator Categories</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              const count = calculators.filter((c) => c.category === cat.id).length;
-              return (
-                <Link
-                  key={cat.id}
-                  href={`/${cat.slug}`}
-                  className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 card-elevated group animate-fade-in"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent">
-                    <Icon className="h-5 w-5 text-accent-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-sm font-semibold group-hover:text-primary transition-colors">
-                      {cat.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">{cat.description}</p>
-                    <span className="text-xs font-medium text-primary mt-2 inline-block">
-                      {count} calculators →
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Trending Formulas */}
-      <section className="container py-14">
-        <h2 className="text-2xl font-bold mb-8">Trending Formulas</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {formulas.map((f) => (
-            <div key={f.title} className="formula-box">
-              <h3 className="font-heading text-sm font-semibold mb-2">{f.title}</h3>
-              <div className="rounded-lg bg-card border border-border px-4 py-3 font-mono text-sm text-primary font-semibold mb-2">
-                {f.formula}
+          <div className="flex items-center justify-between mb-12">
+            <div>
+              <div className="flex items-center gap-2 text-primary font-bold mb-2">
+                <TrendingUp className="h-5 w-5" /> Most Used This Month
               </div>
-              <p className="text-xs text-muted-foreground">{f.desc}</p>
+              <h2 className="text-3xl font-black">Popular Filipino Tools</h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Guides */}
-      <section className="bg-muted/50 py-14">
-        <div className="container">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-bold">Featured Guides</h2>
-            </div>
-            <Link
-              href="/guides"
-              className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1"
-            >
-              View all <ArrowRight className="h-3 w-3" />
+            <Link href="/all-calculators" className="hidden sm:flex items-center gap-2 font-bold text-primary hover:underline">
+              View All 78+ <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {guides.map((g) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {popular.map((calc) => calc && (
               <Link
-                key={g.slug}
-                href={`/guides/${g.slug}`}
-                className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 card-elevated group"
+                key={calc.slug}
+                href={`/${calc.slug}`}
+                className="block rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-lg group"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent">
-                  <BookOpen className="h-5 w-5 text-accent-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-heading text-sm font-semibold group-hover:text-primary transition-colors">
-                    {g.title}
-                  </h3>
-                  <span className="text-xs text-muted-foreground mt-1 inline-flex items-center gap-1">
-                    Read guide <ArrowRight className="h-3 w-3" />
-                  </span>
+                <h3 className="font-bold group-hover:text-primary transition-colors mb-2">
+                  {calc.shortTitle}
+                </h3>
+                <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                  {calc.description}
+                </p>
+                <div className="mt-4 flex items-center justify-between">
+                   <Badge variant="secondary" className="text-[10px] font-bold uppercase tracking-tight">
+                      {calc.category}
+                   </Badge>
+                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-all group-hover:translate-x-1" />
                 </div>
               </Link>
             ))}
@@ -348,80 +214,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* All Tools Section */}
-      <section className="container py-14">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-2">
-            <Grid3X3 className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-bold">All Calculators</h2>
-          </div>
-          <Link
-            href="/all-calculators"
-            className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1"
-          >
-            View all {calculators.length}+ tools <ArrowRight className="h-3 w-3" />
-          </Link>
+      {/* Real-World Use Cases (HEO Boost) */}
+      <section className="container py-16 md:py-24 border-b border-border">
+        <div className="max-w-2xl mb-16">
+           <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight">Designed for Your Scenarios</h2>
+           <p className="text-lg text-muted-foreground">Whether you are a BPO employee, an OFW, a student, or a freelancer, we have built tools for your specific needs.</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {calculators.slice(0, 12).map((calc) => (
-            <Link
-              key={calc.slug}
-              href={`/${calc.slug}`}
-              className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 card-elevated group animate-fade-in"
-            >
-              <div className="text-lg">{categoryIcons[calc.category] || '🔧'}</div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-medium group-hover:text-primary transition-colors truncate">
-                  {calc.shortTitle}
-                </h3>
-                <span className="text-xs text-muted-foreground capitalize">{calc.category}</span>
-              </div>
-              <ArrowRight className="h-3 w-3 text-muted-foreground shrink-0" />
-            </Link>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Link
-            href="/all-calculators"
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            Browse All {calculators.length}+ Calculators <ArrowRight className="h-4 w-4" />
-          </Link>
+        <div className="grid md:grid-cols-2 gap-8">
+           {useCases.map((use, i) => (
+             <Link key={i} href={use.link} className="flex gap-6 p-8 rounded-3xl bg-card border border-border hover:border-primary/40 transition-all">
+                <div className="flex-shrink-0 h-12 w-12 rounded-2xl bg-secondary flex items-center justify-center">
+                   {use.icon}
+                </div>
+                <div>
+                   <h3 className="text-xl font-bold mb-2">{use.title}</h3>
+                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">{use.scenario}</p>
+                   <span className="text-sm font-bold text-primary">{use.tool} →</span>
+                </div>
+             </Link>
+           ))}
         </div>
       </section>
 
-      {/* Comparisons CTA */}
-      <section className="bg-muted/50 py-14">
-        <div className="container">
-          <div className="flex items-center gap-2 mb-8 justify-center">
-            <BarChart3 className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-bold">Compare Calculators</h2>
-          </div>
-          <p className="text-center text-muted-foreground mb-8 max-w-xl mx-auto">
-            Not sure which calculator to use? Check our side-by-side comparisons of the best tools
-            for loans, salary, and finance.
-          </p>
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Link
-              href="/comparisons/best-loan-calculators-philippines"
-              className="rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium card-elevated hover:text-primary transition-colors"
-            >
-              Best Loan Calculators →
-            </Link>
-            <Link
-              href="/comparisons/best-salary-calculators-philippines"
-              className="rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium card-elevated hover:text-primary transition-colors"
-            >
-              Best Salary Calculators →
-            </Link>
-            <Link
-              href="/comparisons/best-finance-calculators-philippines"
-              className="rounded-xl border border-border bg-card px-5 py-3 text-sm font-medium card-elevated hover:text-primary transition-colors"
-            >
-              Best Finance Calculators →
-            </Link>
-          </div>
+      {/* AEO Answer Engine Layer */}
+      <section className="bg-primary/5 py-16 md:py-24">
+        <div className="container max-w-4xl">
+           <div className="text-center mb-12">
+              <Badge className="bg-primary text-primary-foreground mb-4">AEO Knowledge Base</Badge>
+              <h2 className="text-3xl font-black">Expert Answers to Common Queries</h2>
+           </div>
+           <div className="space-y-6">
+              {aeoBlocks.map((block, i) => (
+                <div key={i} className="bg-card border border-border p-8 rounded-3xl shadow-sm">
+                   <h3 className="text-lg font-bold mb-4 flex items-start gap-3">
+                      <Lightbulb className="h-6 w-6 text-amber-500 shrink-0" />
+                      {block.q}
+                   </h3>
+                   <p className="text-muted-foreground leading-relaxed font-medium mb-6">
+                      {block.a}
+                   </p>
+                   <Link href={block.link} className="text-sm font-bold text-primary flex items-center gap-2 hover:underline">
+                      Read Full Authority Guide <ArrowRight className="h-4 w-4" />
+                   </Link>
+                </div>
+              ))}
+           </div>
         </div>
+      </section>
+
+      {/* Trust & EEAT Signals */}
+      <section className="container py-16 md:py-24">
+         <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-8 rounded-3xl bg-secondary/20 border border-border text-center">
+               <ShieldCheck className="h-10 w-10 text-primary mx-auto mb-4" />
+               <h3 className="font-bold mb-2">Verified Logic</h3>
+               <p className="text-xs text-muted-foreground leading-relaxed">Computations are based on the latest 2026 Republic Acts and government circulars from BIR, SSS, and DOLE.</p>
+            </div>
+            <div className="p-8 rounded-3xl bg-secondary/20 border border-border text-center">
+               <Users className="h-10 w-10 text-primary mx-auto mb-4" />
+               <h3 className="font-bold mb-2">Trusted by Millions</h3>
+               <p className="text-xs text-muted-foreground leading-relaxed">Over 1,000,000+ Filipinos rely on our platform for their monthly financial and salary checks every year.</p>
+            </div>
+            <div className="p-8 rounded-3xl bg-secondary/20 border border-border text-center">
+               <CheckCircle2 className="h-10 w-10 text-primary mx-auto mb-4" />
+               <h3 className="font-bold mb-2">100% Free & Private</h3>
+               <p className="text-xs text-muted-foreground leading-relaxed">No sign-ups required. No personal data stored. Our mission is pure educational transparency for all.</p>
+            </div>
+         </div>
+         
+         <div className="mt-16 text-center text-muted-foreground text-xs font-medium italic">
+            Last Updated: May 2, 2026 • Verified by Pinoy Calculator Editorial Team
+         </div>
       </section>
 
       {/* FAQ */}

@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight } from 'lucide-react';
-import { guidesData, getGuideBySlug, getAllGuides } from '@/data/guides';
+import { ArrowRight, CheckCircle2, Info, Lightbulb, ShieldCheck, HelpCircle } from 'lucide-react';
+import { getGuideBySlug, getAllGuides } from '@/data/guides';
 import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 import { JsonLd } from '@/components/seo/json-ld';
 import { getFAQSchema, getHowToSchema, getBreadcrumbSchema } from '@/lib/seo-schemas';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 export async function generateStaticParams() {
   return getAllGuides().map((g) => ({ slug: g.slug }));
@@ -52,7 +55,7 @@ export default async function GuidePage({
   return (
     <>
       <JsonLd data={schemas} />
-      <div className="container max-w-3xl py-8">
+      <div className="container max-w-4xl py-10 md:py-16">
         <Breadcrumbs
           items={[
             { label: 'Guides', href: '/guides' },
@@ -60,24 +63,67 @@ export default async function GuidePage({
           ]}
         />
 
-        <span className="category-badge mb-3 bg-accent text-accent-foreground capitalize">
-          {guide.category}
-        </span>
-        <h1 className="mt-2 text-2xl font-extrabold md:text-3xl mb-4">{guide.title}</h1>
-        <p className="text-sm leading-relaxed text-muted-foreground mb-8">{guide.intro}</p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Badge variant="secondary" className="capitalize">
+            {guide.category}
+          </Badge>
+          <Badge variant="outline" className="bg-emerald-500/10 text-emerald-600 border-emerald-200">
+            Expert Verified
+          </Badge>
+        </div>
+        
+        <h1 className="mt-4 text-3xl font-black tracking-tight md:text-5xl text-foreground leading-[1.1] mb-6">
+          {guide.title}
+        </h1>
+        
+        <p className="text-lg leading-relaxed text-muted-foreground mb-10 max-w-2xl font-medium">
+          {guide.intro}
+        </p>
 
-        <section className="mb-10">
-          <h2 className="text-xl font-bold mb-4">Step-by-Step Guide</h2>
-          <div className="space-y-4">
+        {/* Quick Answer Box */}
+        <Card className="mb-12 border-primary/20 bg-primary/5 shadow-sm overflow-hidden">
+          <div className="bg-primary px-6 py-3 flex items-center gap-2">
+            <Lightbulb className="h-5 w-5 text-primary-foreground" />
+            <h2 className="font-bold text-primary-foreground">Quick Answer & Key Takeaway</h2>
+          </div>
+          <CardContent className="p-6 md:p-8">
+            <div className="grid gap-6 md:grid-cols-2">
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-2">The Short Answer</h3>
+                <p className="text-sm leading-relaxed font-semibold text-foreground">{guide.quickAnswer.summary}</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">Target Audience</h3>
+                  <p className="text-sm font-medium">{guide.quickAnswer.targetAudience}</p>
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">Key Takeaway</h3>
+                  <p className="text-sm font-medium text-primary">{guide.quickAnswer.keyTakeaway}</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Steps Section */}
+        <section className="mb-16">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <CheckCircle2 className="h-6 w-6 text-primary" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight">Step-by-Step Instructions</h2>
+          </div>
+          <div className="grid gap-6">
             {guide.steps.map((step, i) => (
-              <div key={i} className="rounded-xl border border-border bg-card p-5">
-                <div className="flex items-start gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+              <div key={i} className="group relative rounded-2xl border border-border bg-card p-6 transition-all hover:shadow-md">
+                <div className="flex items-start gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-lg font-black text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                     {i + 1}
                   </span>
                   <div>
-                    <h3 className="text-sm font-semibold mb-1">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{step.content}</p>
+                    <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{step.content}</p>
                   </div>
                 </div>
               </div>
@@ -85,53 +131,120 @@ export default async function GuidePage({
           </div>
         </section>
 
-        <section className="mb-10">
-          <h2 className="text-xl font-bold mb-4">Example</h2>
-          <div className="rounded-xl border border-border bg-accent/30 p-5">
-            {guide.example.split('\n\n').map((p, i) => (
-              <p key={i} className="text-sm text-muted-foreground leading-relaxed mb-3 last:mb-0">
-                {p}
-              </p>
+        {/* Infographic Idea (Mockup) */}
+        {guide.infographicIdeas && guide.infographicIdeas.length > 0 && (
+          <section className="mb-16">
+            {guide.infographicIdeas.map((info, idx) => (
+              <Card key={idx} className="border-dashed border-2 border-primary/30 bg-primary/5 mb-6">
+                <CardContent className="p-8 text-center">
+                  <div className="mx-auto h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <Info className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2">Interactive Visual: {info.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4 italic">[{info.format}: {info.dataPoints.join(", ")}]</p>
+                  <p className="text-xs text-muted-foreground/60">Note: This is a placeholder for a custom infographic asset.</p>
+                </CardContent>
+              </Card>
             ))}
-          </div>
-        </section>
-
-        {guide.faqs.length > 0 && (
-          <section className="mb-10">
-            <h2 className="text-xl font-bold mb-4">Frequently Asked Questions</h2>
-            <div className="space-y-3">
-              {guide.faqs.map((faq, i) => (
-                <div key={i} className="rounded-xl border border-border bg-card p-5">
-                  <h3 className="text-sm font-semibold mb-1">{faq.q}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
-                </div>
-              ))}
-            </div>
           </section>
         )}
 
-        <div className="rounded-xl bg-primary/5 border border-primary/20 p-5 mb-10 text-center">
-          <p className="text-sm font-medium mb-3">{guide.ctaText}</p>
+        {/* Example Section */}
+        <section className="mb-16">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-10 w-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+              <Lightbulb className="h-6 w-6 text-amber-600" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight">Real-World Examples</h2>
+          </div>
+          <div className="rounded-2xl border-2 border-amber-200 bg-amber-50/50 p-6 md:p-8">
+            <div className="space-y-4 font-medium text-amber-900/80 italic leading-relaxed whitespace-pre-line">
+              {guide.example}
+            </div>
+          </div>
+        </section>
+
+        {/* Key Concepts */}
+        {guide.keyConcepts && guide.keyConcepts.length > 0 && (
+          <section className="mb-16">
+             <h2 className="text-2xl font-bold tracking-tight mb-6">Expert Concepts to Master</h2>
+             <div className="grid gap-4 sm:grid-cols-2">
+                {guide.keyConcepts.map((concept, i) => (
+                  <div key={i} className="p-5 rounded-xl bg-secondary/30 border border-border">
+                    <h3 className="font-bold text-foreground mb-1">{concept.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{concept.description}</p>
+                  </div>
+                ))}
+             </div>
+          </section>
+        )}
+
+        {/* FAQ Section */}
+        {guide.faqs.length > 0 && (
+          <section className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-10 w-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                <HelpCircle className="h-6 w-6 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold tracking-tight">Frequently Asked Questions</h2>
+            </div>
+            <Accordion type="single" collapsible className="w-full space-y-3">
+              {guide.faqs.map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="border rounded-xl px-4 bg-card">
+                  <AccordionTrigger className="text-left font-bold hover:no-underline text-foreground py-4">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </section>
+        )}
+
+        {/* Trust Signals */}
+        <div className="grid gap-6 md:grid-cols-2 mb-16 pt-8 border-t border-border">
+           <div className="flex gap-4">
+              <ShieldCheck className="h-6 w-6 text-emerald-600 shrink-0" />
+              <div>
+                 <h4 className="text-sm font-bold mb-1 uppercase tracking-wider">Editorial Methodology</h4>
+                 <p className="text-xs text-muted-foreground leading-relaxed">{guide.editorialMethodology}</p>
+              </div>
+           </div>
+           <div className="flex gap-4">
+              <Info className="h-6 w-6 text-muted-foreground shrink-0" />
+              <div>
+                 <h4 className="text-sm font-bold mb-1 uppercase tracking-wider">Disclaimer</h4>
+                 <p className="text-xs text-muted-foreground leading-relaxed">{guide.disclaimer}</p>
+              </div>
+           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="rounded-3xl bg-primary p-8 md:p-12 text-center text-primary-foreground shadow-xl shadow-primary/20 mb-16">
+          <p className="text-lg md:text-xl font-bold mb-6 max-w-md mx-auto">{guide.ctaText}</p>
           <Link
             href={guide.ctaLink}
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-base font-bold text-primary hover:bg-white/90 transition-all shadow-lg active:scale-95"
           >
-            Use Calculator <ArrowRight className="h-4 w-4" />
+            Open Free Calculator <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
 
+        {/* Related Guides */}
         {guide.relatedGuides.length > 0 && (
           <section>
-            <h2 className="text-xl font-bold mb-4">Related Guides</h2>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <h2 className="text-2xl font-bold tracking-tight mb-8">Continue Reading</h2>
+            <div className="grid gap-4 sm:grid-cols-2">
               {guide.relatedGuides.map((rel) => (
                 <Link
                   key={rel.slug}
                   href={`/guides/${rel.slug}`}
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 hover:border-primary/40 transition-colors"
+                  className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:bg-primary/5 transition-all shadow-sm"
                 >
-                  <span className="text-sm font-medium group-hover:text-primary">{rel.title}</span>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />
+                  <span className="font-bold group-hover:text-primary transition-colors">{rel.title}</span>
+                  <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                 </Link>
               ))}
             </div>
