@@ -257,6 +257,17 @@ export default async function CalculatorSlugPage({
               <ShareButtons title={calc.title} />
             </div>
           </div>
+          
+          <div className="mb-8 flex items-center gap-3 text-sm text-muted-foreground border-b border-border pb-4">
+            <div className="flex items-center gap-1.5">
+              <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">A</span>
+              <span className="font-medium text-foreground">Admin Team</span>
+            </div>
+            <span>•</span>
+            <time dateTime={new Date().toISOString().split('T')[0]}>
+              Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </time>
+          </div>
 
           {/* Interactive Calculator — HERO OF THE PAGE */}
           <div className="mb-10">
@@ -422,26 +433,11 @@ export default async function CalculatorSlugPage({
             </section>
           )}
 
-          {/* References */}
-          {calc.references.length > 0 && (
-            <section className="mb-10">
-              <h2 className="mb-4 text-xl font-bold">References</h2>
-              <ul className="space-y-2">
-                {calc.references.map((ref) => (
-                  <li key={ref.url}>
-                    <a
-                      href={ref.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
-                    >
-                      {ref.title} <ExternalLink className="h-3 w-3" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
+          <section className="mt-12 rounded-xl bg-muted/50 p-5 text-xs text-muted-foreground border border-border">
+            <p>
+              <strong>Disclaimer:</strong> This calculator provides mathematical estimates based on the formulas and variables provided. It is designed for informational and educational purposes only and should not be considered professional financial, legal, medical, or engineering advice. Always consult with a qualified professional or official government agency (e.g., BIR, SSS, Pag-IBIG) before making significant decisions based on these calculations.
+            </p>
+          </section
         </div>
       </div>
     </>
