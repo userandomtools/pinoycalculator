@@ -231,8 +231,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
     case "rcbc-car-loan-calculator":
     case "cimb-bank-personal-loan-calculator":
     case "eastwest-personal-loan-calculator":
-    case "metrobank-home-loan-calculator":
-    case "pag-ibig-mpl-calculator": {
+    case "metrobank-home-loan-calculator": {
       const P = Number(values.principal) || 0;
       const annualRate = Number(values.rate) || 0;
       const n = Number(values.term) || 1;
@@ -315,9 +314,7 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
       const maxMinterm = Math.pow(2, vars) - 1;
       const validMinterms = minterms.filter(m => m >= 0 && m <= maxMinterm);
       return { "Variables": `${vars}`, "Valid Minterms": validMinterms.join(", ") || "None entered", "Max Minterm": `${maxMinterm}`, "Tip": `For ${vars} variables, minterms range from 0 to ${maxMinterm}. Group adjacent 1s in powers of 2.` };
-    }
-
-    case "philippine-vat-calculator": {
+    } {
       const amount = Number(values.amount) || 0;
       const type = values.type || "exclusive";
       if (type === "exclusive") {

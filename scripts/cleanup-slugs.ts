@@ -17,6 +17,8 @@ const slugsToRemove = [
   "ro-stat-calculator",
   "engine-cc-calculator",
   "canine-pregnancy-calculator",
+  "pag-ibig-mpl-calculator",
+  "philippine-vat-calculator",
   
   // Fake / Thin / Buying Guides
   "scientific-calculator-price-philippines",
