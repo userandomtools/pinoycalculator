@@ -48,7 +48,7 @@ export const getCalculatorSchema = (calc: { title: string; slug: string; metaDes
   "@context": "https://schema.org",
   "@type": "WebApplication",
   name: calc.title,
-  url: `${SITE_URL}/calculators/${calc.slug}`,
+  url: `${SITE_URL}/${calc.slug}`,
   description: calc.metaDescription,
   applicationCategory: "FinanceApplication",
   operatingSystem: "All",

@@ -22,14 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${SITE_URL}/calculators/${cat.slug}`,
+    url: `${SITE_URL}/${cat.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
   const calculatorPages: MetadataRoute.Sitemap = calculators.map((calc) => ({
-    url: `${SITE_URL}/calculators/${calc.slug}`,
+    url: `${SITE_URL}/${calc.slug}`,
     lastModified: now,
     changeFrequency: 'monthly',
     priority: 0.8,

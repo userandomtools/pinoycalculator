@@ -38,7 +38,7 @@ export const guidesData: Record<string, GuideData> = {
       { q: "Why does my estimate not match my employer's figure exactly?", a: "The difference may come from payroll cutoffs, adjustments, previous partial releases, or items that are not counted as part of your basic salary. If the gap feels large, ask payroll for the detailed breakdown." },
     ],
     ctaText: "Use our 13th Month Pay Calculator to instantly compute your bonus.",
-    ctaLink: "/calculators/13th-month-pay-calculator-philippines",
+    ctaLink: "/13th-month-pay-calculator-philippines",
     relatedGuides: [
       { slug: "how-to-calculate-night-differential", title: "How to Calculate Night Differential Pay" },
       { slug: "how-to-calculate-vat-philippines", title: "How to Calculate VAT in the Philippines" },
@@ -67,7 +67,7 @@ export const guidesData: Record<string, GuideData> = {
       { q: "What if the dividend rate changes every year?", a: "That is normal. The rate is declared annually, so estimates are still useful for planning, but they should not be treated as guaranteed final results." },
     ],
     ctaText: "Use our Pag-IBIG MP2 Calculator to estimate your savings growth.",
-    ctaLink: "/calculators/pag-ibig-mp2-calculator",
+    ctaLink: "/pag-ibig-mp2-calculator",
     relatedGuides: [
       { slug: "how-to-compute-13th-month-pay-philippines", title: "How to Compute 13th Month Pay" },
       { slug: "how-to-calculate-vat-philippines", title: "How to Calculate VAT in the Philippines" },
@@ -94,7 +94,7 @@ export const guidesData: Record<string, GuideData> = {
       { q: "Is GWA the same as GPA?", a: "Not exactly. GWA uses the Philippine grading scale (1.0-5.0) while GPA typically uses the American 4.0 scale. DLSU uses a 0.0-4.0 GPA system." },
     ],
     ctaText: "Use our GWA Calculator to compute your average instantly.",
-    ctaLink: "/calculators/gwa-calculator-philippines",
+    ctaLink: "/gwa-calculator-philippines",
     relatedGuides: [
       { slug: "how-to-compute-13th-month-pay-philippines", title: "How to Compute 13th Month Pay" },
       { slug: "pag-ibig-mp2-savings-guide", title: "How Pag-IBIG MP2 Savings Works" },
@@ -121,7 +121,7 @@ export const guidesData: Record<string, GuideData> = {
       { q: "What mistakes happen most often in VAT computation?", a: "The most common issues are mixing up VAT-inclusive and VAT-exclusive prices, applying VAT to the wrong base amount, and assuming every transaction is taxable without checking exemptions first." },
     ],
     ctaText: "Use our VAT Calculator to compute 12% VAT instantly.",
-    ctaLink: "/calculators/vat-calculator-philippines",
+    ctaLink: "/vat-calculator-philippines",
     relatedGuides: [
       { slug: "how-to-compute-13th-month-pay-philippines", title: "How to Compute 13th Month Pay" },
       { slug: "pag-ibig-mp2-savings-guide", title: "How Pag-IBIG MP2 Savings Works" },
@@ -148,7 +148,7 @@ export const guidesData: Record<string, GuideData> = {
       { q: "Why does my payslip look different from my estimate?", a: "Differences can come from payroll cutoffs, overtime rules, holiday premiums, or employer-specific formatting. If the gap looks too large, it is worth asking for the computation details." },
     ],
     ctaText: "Use our Night Differential Calculator to compute your NSD pay.",
-    ctaLink: "/calculators/night-differential-calculator",
+    ctaLink: "/night-differential-calculator",
     relatedGuides: [
       { slug: "how-to-compute-13th-month-pay-philippines", title: "How to Compute 13th Month Pay" },
     ],

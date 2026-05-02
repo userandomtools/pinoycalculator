@@ -64,7 +64,7 @@ const guideIndex: IndexedPost[] = getAllGuides().map(guide => {
       guide.example,
     ),
     relatedSlugs: guide.relatedGuides.map(item => item.slug),
-    linkedCalculatorSlug: guide.ctaLink.replace("/calculators/", ""),
+    linkedCalculatorSlug: guide.ctaLink.replace("/", ""),
   };
 });
 
@@ -77,7 +77,7 @@ const calculatorIndex: IndexedPost[] = calculators.map(calc => {
     title: calc.title,
     description: calc.metaDescription,
     category: calc.category,
-    href: `/calculators/${calc.slug}`,
+    href: `/${calc.slug}`,
     badgeLabel: "Tool",
     tags: tokenize(
       calc.category,

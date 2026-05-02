@@ -76,7 +76,7 @@ export async function generateMetadata({
       title: cat.name,
       description: `Free ${cat.name.toLowerCase()} for Filipinos. ${cat.description}.`,
       alternates: {
-        canonical: `https://pinoycalculator.com/calculators/${cat.slug}`,
+        canonical: `https://pinoycalculator.com/${cat.slug}`,
       },
     };
   }
@@ -88,7 +88,7 @@ export async function generateMetadata({
       title: calc.title,
       description: calc.metaDescription,
       alternates: {
-        canonical: `https://pinoycalculator.com/calculators/${calc.slug}`,
+        canonical: `https://pinoycalculator.com/${calc.slug}`,
       },
       openGraph: {
         title: calc.title,
@@ -124,7 +124,7 @@ export default async function CalculatorSlugPage({
         <Breadcrumbs
           items={[
             { label: 'Calculators', href: '/all-calculators' },
-            { label: cat.name, href: `/calculators/${cat.slug}` },
+            { label: cat.name, href: `/${cat.slug}` },
           ]}
         />
 
@@ -142,7 +142,7 @@ export default async function CalculatorSlugPage({
           {calcs.map((calc) => (
             <Link
               key={calc.slug}
-              href={`/calculators/${calc.slug}`}
+              href={`/${calc.slug}`}
               className="block rounded-xl border border-border bg-card p-5 card-elevated group h-full animate-fade-in"
             >
               <div className="text-2xl mb-3">{categoryIcons[calc.category]}</div>
@@ -213,9 +213,9 @@ export default async function CalculatorSlugPage({
       { name: 'Home', url: '/' },
       {
         name: calc.category.charAt(0).toUpperCase() + calc.category.slice(1),
-        url: `/calculators/${calc.category}`,
+        url: `/${calc.category}`,
       },
-      { name: calc.shortTitle, url: `/calculators/${calc.slug}` },
+      { name: calc.shortTitle, url: `/${calc.slug}` },
     ]),
   ];
 
@@ -229,11 +229,11 @@ export default async function CalculatorSlugPage({
             {
               label:
                 calc.category.charAt(0).toUpperCase() + calc.category.slice(1),
-              href: `/calculators/${calc.category}`,
+              href: `/${calc.category}`,
             },
             {
               label: calc.shortTitle,
-              href: `/calculators/${calc.slug}`,
+              href: `/${calc.slug}`,
             },
           ]}
         />
@@ -415,7 +415,7 @@ export default async function CalculatorSlugPage({
                 {relatedCalcs.map((rel) => (
                   <Link
                     key={rel.slug}
-                    href={`/calculators/${rel.slug}`}
+                    href={`/${rel.slug}`}
                     className="group flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-accent/30"
                   >
                     <div>

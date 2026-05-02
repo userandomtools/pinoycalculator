@@ -21,11 +21,11 @@ const mainNavLinks = [
 ];
 
 const calculatorCategories = [
-  { href: '/calculators/finance', label: 'Finance' },
-  { href: '/calculators/salary', label: 'Salary' },
-  { href: '/calculators/gaming', label: 'Gaming' },
-  { href: '/calculators/academic', label: 'Academic' },
-  { href: '/calculators/engineering', label: 'Engineering' },
+  { href: '/finance', label: 'Finance' },
+  { href: '/salary', label: 'Salary' },
+  { href: '/gaming', label: 'Gaming' },
+  { href: '/academic', label: 'Academic' },
+  { href: '/engineering', label: 'Engineering' },
   { href: '/guides', label: 'Guides' },
   { href: '/comparisons', label: 'Comparisons' },
 ];
@@ -158,7 +158,7 @@ export function HeaderClient() {
                 {results.map((r) => (
                   <Link
                     key={r.slug}
-                    href={`/calculators/${r.slug}`}
+                    href={`/${r.slug}`}
                     className="block rounded-lg px-3 py-2 text-sm hover:bg-muted transition-colors"
                   >
                     <span className="font-medium text-foreground">{r.shortTitle}</span>

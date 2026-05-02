@@ -42,7 +42,7 @@ export default function AllCalculatorsPage() {
               {calcs.map((calc) => (
                 <Link
                   key={calc.slug}
-                  href={`/calculators/${calc.slug}`}
+                  href={`/${calc.slug}`}
                   className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 card-elevated group"
                 >
                   <div className="text-lg">{categoryIcons[calc.category] || '🔧'}</div>

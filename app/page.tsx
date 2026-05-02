@@ -196,7 +196,7 @@ export default function HomePage() {
               calc && (
                 <Link
                   key={calc.slug}
-                  href={`/calculators/${calc.slug}`}
+                  href={`/${calc.slug}`}
                   className="block rounded-xl border border-border bg-card p-5 card-elevated group animate-fade-in"
                 >
                   <div className="text-2xl mb-3">{categoryIcons[calc.category]}</div>
@@ -271,7 +271,7 @@ export default function HomePage() {
               return (
                 <Link
                   key={cat.id}
-                  href={`/calculators/${cat.slug}`}
+                  href={`/${cat.slug}`}
                   className="flex items-start gap-4 rounded-xl border border-border bg-card p-5 card-elevated group animate-fade-in"
                 >
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent">
@@ -366,7 +366,7 @@ export default function HomePage() {
           {calculators.slice(0, 12).map((calc) => (
             <Link
               key={calc.slug}
-              href={`/calculators/${calc.slug}`}
+              href={`/${calc.slug}`}
               className="flex items-center gap-3 rounded-xl border border-border bg-card p-4 card-elevated group animate-fade-in"
             >
               <div className="text-lg">{categoryIcons[calc.category] || '🔧'}</div>

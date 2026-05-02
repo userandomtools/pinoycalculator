@@ -44,7 +44,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             {comp.items.map((item) => (
               <tr key={item.slug} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
                 <td className="px-4 py-3">
-                  <Link href={`/calculators/${item.slug}`} className="font-medium text-primary hover:underline">{item.name}</Link>
+                  <Link href={`/${item.slug}`} className="font-medium text-primary hover:underline">{item.name}</Link>
                 </td>
                 {comp.featureHeaders.map((h) => {
                   const val = item.features[h];

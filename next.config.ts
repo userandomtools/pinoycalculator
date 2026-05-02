@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
     formats: ['image/webp'],
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/calculators/:slug',
+        destination: '/:slug',
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {

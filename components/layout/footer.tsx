@@ -29,7 +29,7 @@ export function Footer() {
               {categories.map((cat) => (
                 <li key={cat.id}>
                   <Link
-                    href={`/calculators/${cat.slug}`}
+                    href={`/${cat.slug}`}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {cat.name}
@@ -44,7 +44,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/calculators/13th-month-pay-calculator-philippines"
+                  href="/13th-month-pay-calculator-philippines"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   13th Month Pay
@@ -52,7 +52,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/calculators/loan-calculator-philippines"
+                  href="/loan-calculator-philippines"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Loan Calculator
@@ -60,7 +60,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/calculators/vat-calculator-philippines"
+                  href="/vat-calculator-philippines"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   VAT Calculator
@@ -68,7 +68,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/calculators/gwa-calculator-philippines"
+                  href="/gwa-calculator-philippines"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   GWA Calculator
@@ -76,7 +76,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/calculators/mlbb-win-rate-calculator"
+                  href="/mlbb-win-rate-calculator"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   MLBB Win Rate

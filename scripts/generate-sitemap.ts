@@ -98,10 +98,10 @@ const entries: string[] = [];
 staticPages.forEach(p => entries.push(urlEntry(p.path, p.priority, p.freq)));
 
 // Category pages
-categorySlugs.forEach(s => entries.push(urlEntry(`/calculators/${s}`, "0.8", "weekly")));
+categorySlugs.forEach(s => entries.push(urlEntry(`/${s}`, "0.8", "weekly")));
 
 // Calculator pages
-uniqueCalcSlugs.forEach(s => entries.push(urlEntry(`/calculators/${s}`, "0.8", "monthly")));
+uniqueCalcSlugs.forEach(s => entries.push(urlEntry(`/${s}`, "0.8", "monthly")));
 
 // Guide pages
 guideSlugs.forEach(s => entries.push(urlEntry(`/guides/${s}`, "0.8", "monthly")));

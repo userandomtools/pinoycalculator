@@ -24,7 +24,7 @@ export function HeroSearch() {
           {results.map((r) => (
             <Link
               key={r.slug}
-              href={`/calculators/${r.slug}`}
+              href={`/${r.slug}`}
               className="flex items-center gap-3 px-4 py-3 hover:bg-muted transition-colors"
               onClick={() => setSearchQuery('')}
             >

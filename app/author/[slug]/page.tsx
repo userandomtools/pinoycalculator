@@ -76,11 +76,11 @@ const authors: Record<string, AuthorData> = {
       {
         category: "Finance & Salary Calculators",
         items: [
-          { title: "13th Month Pay Calculator", link: "/calculators/13th-month-pay-calculator" },
-          { title: "SSS Maternity Benefit Calculator", link: "/calculators/sss-maternity-benefit-calculator" },
-          { title: "Philippine VAT Calculator", link: "/calculators/philippine-vat-calculator" },
-          { title: "Night Differential Calculator", link: "/calculators/night-differential-calculator" },
-          { title: "Separation Pay Calculator", link: "/calculators/separation-pay-calculator" },
+          { title: "13th Month Pay Calculator", link: "/13th-month-pay-calculator" },
+          { title: "SSS Maternity Benefit Calculator", link: "/sss-maternity-benefit-calculator" },
+          { title: "Philippine VAT Calculator", link: "/philippine-vat-calculator" },
+          { title: "Night Differential Calculator", link: "/night-differential-calculator" },
+          { title: "Separation Pay Calculator", link: "/separation-pay-calculator" },
         ],
       },
       {
@@ -96,11 +96,11 @@ const authors: Record<string, AuthorData> = {
       {
         category: "Academic & Utility Tools",
         items: [
-          { title: "GWA Calculator", link: "/calculators/general-weighted-average-calculator" },
-          { title: "GPA Calculator Philippines", link: "/calculators/gpa-calculator-philippines" },
-          { title: "Cronbach's Alpha Calculator", link: "/calculators/cronbachs-alpha-calculator" },
-          { title: "Angel Number Calculator", link: "/calculators/angel-number-calculator" },
-          { title: "Age Calculator", link: "/calculators/age-calculator" },
+          { title: "GWA Calculator", link: "/general-weighted-average-calculator" },
+          { title: "GPA Calculator Philippines", link: "/gpa-calculator-philippines" },
+          { title: "Cronbach's Alpha Calculator", link: "/cronbachs-alpha-calculator" },
+          { title: "Angel Number Calculator", link: "/angel-number-calculator" },
+          { title: "Age Calculator", link: "/age-calculator" },
         ],
       },
     ],
@@ -184,10 +184,10 @@ const authors: Record<string, AuthorData> = {
       {
         category: "Calculator Contributions",
         items: [
-          { title: "Electrical Load Calculator", link: "/calculators/electrical-load-calculator" },
-          { title: "Oxygen Tank Duration Calculator", link: "/calculators/oxygen-tank-duration-calculator" },
-          { title: "Ampicillin Dose Calculator", link: "/calculators/ampicillin-dose-calculator" },
-          { title: "Paracetamol Dosage Calculator", link: "/calculators/paracetamol-dosage-calculator" },
+          { title: "Electrical Load Calculator", link: "/electrical-load-calculator" },
+          { title: "Oxygen Tank Duration Calculator", link: "/oxygen-tank-duration-calculator" },
+          { title: "Ampicillin Dose Calculator", link: "/ampicillin-dose-calculator" },
+          { title: "Paracetamol Dosage Calculator", link: "/paracetamol-dosage-calculator" },
         ],
       },
     ],
