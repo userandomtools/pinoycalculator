@@ -227,7 +227,6 @@ export function computeCalculator(calc: CalculatorDefinition, values: CalcValues
     case "psslai-loan-calculator":
     case "pag-ibig-multi-purpose-loan-calculator":
     case "landbank-salary-loan-calculator":
-    case "metrobank-auto-loan-calculator":
     case "rcbc-car-loan-calculator":
     case "cimb-bank-personal-loan-calculator":
     case "eastwest-personal-loan-calculator":

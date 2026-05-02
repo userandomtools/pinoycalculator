@@ -1,0 +1,26 @@
+import * as fs from 'fs';
+const file = './data/calculators.ts';
+let c = fs.readFileSync(file, 'utf-8');
+
+function addToField(slug: string, field: string, extra: string) {
+  const marker = `slug: "${slug}"`;
+  const idx = c.indexOf(marker);
+  if (idx === -1) return;
+  const chunk = c.substring(idx, idx + 12000);
+  const re = new RegExp(field + ': "([^"]*)"');
+  const m = chunk.match(re);
+  if (!m) return;
+  c = c.replace(m[0], m[0].slice(0,-1) + " " + extra + '"');
+}
+
+addToField("metrobank-car-loan-calculator", "description", "Beyond simply estimating payments, this calculator acts as a safeguard against predatory lending tactics sometimes employed by secondary financing companies. By understanding the standard bank rates and seeing the math laid out clearly, consumers are better equipped to challenge excessive hidden fees or balloon payments that are not immediately apparent on the showroom floor. Using this tool before visiting a dealership allows you to set a firm boundary on your monthly budget, ensuring that the excitement of buying a new vehicle does not lead to years of financial strain. Ultimately, an informed buyer is a bank's best client and their own best financial advocate.");
+addToField("metrobank-car-loan-calculator", "philippinesContext", "Furthermore, the Metro Manila traffic crisis and the push for modernized public utility vehicles have slightly shifted auto lending dynamics. While traditional sedans remain popular, there is a growing trend of financing subcompact SUVs and hybrid vehicles. Metrobank occasionally offers preferential, lower interest rates for eco-friendly or hybrid vehicles as part of sustainable financing initiatives. Keeping a clean credit record is paramount; a single default on a credit card or a delayed personal loan payment recorded in the CIC database can cause Metrobank to either reject an auto loan outright or demand a significantly higher down payment to mitigate their perceived risk.");
+
+addToField("metrobank-home-loan-calculator", "description", "This calculator is an indispensable part of the home-buying journey, especially during the critical preselling phase. When real estate developers pitch 'no downpayment' or 'low monthly' schemes, they are usually only referring to the equity portion spread over 2 to 3 years. After that period, the massive lump sum (the 80% balance) must be paid either in cash or through a bank loan like Metrobank. Many buyers default at this turnover stage because they never calculated what the actual bank amortization would be. By using this tool early on, buyers can forecast their future financial obligations accurately, avoiding the tragedy of losing both their dream home and their hard-earned equity payments due to an unapproved bank loan.");
+addToField("metrobank-home-loan-calculator", "philippinesContext", "The Philippine real estate market, particularly in Metro Manila, Cebu, and Davao, has seen explosive price growth. As a result, long-term financing is the only viable path to homeownership for the middle class. The Maceda Law (Republic Act No. 6552) provides some protection for buyers who default on installment payments, but these protections do not apply once the property is mortgaged to a bank. This makes the accuracy of your loan forecasting even more critical. Metrobank's rigid underwriting process ensures that borrowers are not over-leveraged, serving as a necessary checkpoint. If the bank requires a higher down payment or refuses the loan amount, it is often a harsh but realistic indicator that the property is currently beyond the buyer's safe financial capacity.");
+
+addToField("bdo-installment-card-calculator", "description", "The BDO Installment Card calculator is a crucial financial planning tool that demystifies the actual cost of readily available credit. The convenience of instantly converting a credit limit into cash is unmatched, but it requires extreme financial discipline. Borrowers often focus only on the low promotional rate without realizing how compounding finance charges will explode the debt if a single payment is missed. This calculator forces users to confront the total payable amount upfront. By playing with different terms, users can optimize their cash flow—perhaps opting for an 18-month term instead of 24 months to save thousands of pesos in interest, provided the higher monthly payment fits securely within their budget.");
+addToField("bdo-installment-card-calculator", "philippinesContext", "The success of the BDO Installment Card highlights a broader trend in Philippine consumer finance: the shift away from informal lenders (like '5-6' loan sharks) toward formalized, bank-regulated credit. For small business owners and freelancers who often struggle to secure traditional business loans due to stringent documentary requirements, this card serves as a vital lifeline for working capital. The BSP actively encourages this shift as it brings more transactions into the formal banking sector, allowing for better monitoring of systemic credit risk. However, it also places the burden of financial literacy squarely on the consumer, emphasizing the need for accessible tools like this calculator to prevent the accumulation of unmanageable consumer debt.");
+
+fs.writeFileSync(file, c);
+console.log('Boost batch 11 done');

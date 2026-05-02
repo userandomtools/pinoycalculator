@@ -19,6 +19,7 @@ const slugsToRemove = [
   "canine-pregnancy-calculator",
   "pag-ibig-mpl-calculator",
   "philippine-vat-calculator",
+  "metrobank-auto-loan-calculator",
   
   // Fake / Thin / Buying Guides
   "scientific-calculator-price-philippines",
