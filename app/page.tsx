@@ -17,9 +17,9 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Best Online Calculators for Filipinos',
+  title: 'Best Online Calculators Philippines 2026: Get Accurate Results',
   description:
-    'Free calculators for loans, salary, gaming stats, health metrics, and financial planning in the Philippines. Smart Calculators for Filipinos.',
+    'Use the expert-verified Pinoy Calculator 2026 to access 78+ free tools for loans, salary, VAT \u0026 finance. Optimized for accurate Philippine results and AEO depth.',
   alternates: {
     canonical: 'https://pinoycalculator.com/',
   },

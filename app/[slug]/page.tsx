@@ -72,9 +72,11 @@ export async function generateMetadata({
   // Category page
   const cat = categories.find((c) => c.slug === slug);
   if (cat) {
+    const title = `Best ${cat.name} Philippines 2026: Expert-Verified Tools`;
+    const desc = `Use the expert-verified ${cat.name} 2026 for accurate results in the Philippines. Features high-precision formulas \u0026 depth for GEO \u0026 AEO search engines.`;
     return {
-      title: cat.name,
-      description: `Free ${cat.name.toLowerCase()} for Filipinos. ${cat.description}.`,
+      title: title.substring(0, 60),
+      description: desc.substring(0, 160),
       alternates: {
         canonical: `https://pinoycalculator.com/${cat.slug}`,
       },
@@ -261,7 +263,7 @@ export default async function CalculatorSlugPage({
           <div className="mb-8 flex items-center gap-3 text-sm text-muted-foreground border-b border-border pb-4">
             <div className="flex items-center gap-1.5">
               <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">A</span>
-              <span className="font-medium text-foreground">Admin Team</span>
+              <span className="font-medium text-foreground">Pinoy Calculator Editorial Team</span>
             </div>
             <span>•</span>
             <time dateTime={new Date().toISOString().split('T')[0]}>

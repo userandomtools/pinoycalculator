@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: `Best Online Calculators for Filipinos – ${SITE_NAME}`,
-    template: `%s | ${SITE_NAME}`,
+    template: `%s`,
   },
   description: SITE_DESCRIPTION,
   authors: [{ name: SITE_NAME }],
