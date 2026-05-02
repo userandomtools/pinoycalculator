@@ -283,7 +283,7 @@ export default function HomePage() {
          </div>
          
          <div className="mt-16 text-center text-muted-foreground text-xs font-medium italic">
-            Last Updated: May 2, 2026 • Verified by Pinoy Calculator Editorial Team
+            Last Updated: May 2, 2026 • Verified by Pinoycalculator team
          </div>
       </section>
 

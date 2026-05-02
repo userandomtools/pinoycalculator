@@ -262,8 +262,8 @@ export default async function CalculatorSlugPage({
           
           <div className="mb-8 flex items-center gap-3 text-sm text-muted-foreground border-b border-border pb-4">
             <div className="flex items-center gap-1.5">
-              <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">A</span>
-              <span className="font-medium text-foreground">Pinoy Calculator Editorial Team</span>
+              <span className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">P</span>
+              <span className="font-medium text-foreground">Pinoycalculator team</span>
             </div>
             <span>•</span>
             <time dateTime={new Date().toISOString().split('T')[0]}>

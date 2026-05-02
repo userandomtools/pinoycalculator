@@ -164,6 +164,20 @@ export default async function GuidePage({
           </div>
         </section>
 
+        {/* Comprehensive Analysis Content */}
+        {guide.comprehensiveContent && guide.comprehensiveContent.length > 0 && (
+          <section className="mb-16 space-y-12">
+            {guide.comprehensiveContent.map((section, idx) => (
+              <div key={idx} className="prose prose-slate max-w-none">
+                <h2 className="text-3xl font-extrabold text-foreground mb-6">{section.title}</h2>
+                <div className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
+                  {section.content}
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
+
         {/* Key Concepts */}
         {guide.keyConcepts && guide.keyConcepts.length > 0 && (
           <section className="mb-16">
@@ -188,18 +202,18 @@ export default async function GuidePage({
               </div>
               <h2 className="text-2xl font-bold tracking-tight">Frequently Asked Questions</h2>
             </div>
-            <Accordion type="single" collapsible className="w-full space-y-3">
+            <div className="space-y-10">
               {guide.faqs.map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="border rounded-xl px-4 bg-card">
-                  <AccordionTrigger className="text-left font-bold hover:no-underline text-foreground py-4">
+                <div key={i} className="group">
+                  <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {faq.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-4 leading-relaxed">
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
                     {faq.a}
-                  </AccordionContent>
-                </AccordionItem>
+                  </p>
+                </div>
               ))}
-            </Accordion>
+            </div>
           </section>
         )}
 

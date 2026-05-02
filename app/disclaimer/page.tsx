@@ -60,9 +60,23 @@ const Disclaimer = () => (
         </section>
 
         <section>
+          <h2 className="text-2xl font-bold text-foreground mb-3">Professional Consultation Highly Recommended</h2>
+          <p>
+            While our tools for Pag-IBIG MP2, SSS, and Income Tax are designed for high accuracy, they do not account for individual tax nuances, specific employer policies, or pending legislative changes that may not yet be reflected in the code. We strongly recommend consulting with a <strong>Certified Public Accountant (CPA)</strong> or a licensed financial advisor for complex financial planning.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold text-foreground mb-3">No Warranties</h2>
+          <p>
+            The services and all information, content, materials, and products included on or otherwise made available to you through this website are provided on an "as is" and "as available" basis, unless otherwise specified in writing. Pinoy Calculator makes no representations or warranties of any kind, express or implied.
+          </p>
+        </section>
+
+        <section>
           <h2 className="text-2xl font-bold text-foreground mb-3">Limitation of Liability</h2>
           <p>
-            By using this website, you agree that Pinoy Calculator, its owners, and its developers shall not be held liable for any financial losses, legal issues, or damages resulting from the use of or reliance on the information provided by our tools.
+            By using this website, you agree that Pinoycalculator team, its owners, and its developers shall not be held liable for any financial losses, legal issues, or damages resulting from the use of or reliance on the information provided by our tools.
           </p>
         </section>
       </div>

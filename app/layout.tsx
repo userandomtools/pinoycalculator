@@ -9,11 +9,11 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `Best Online Calculators for Filipinos – ${SITE_NAME}`,
+    default: `Pinoy Calculator 2026: Expert-Verified Tools for Filipinos`,
     template: `%s`,
   },
   description: SITE_DESCRIPTION,
-  authors: [{ name: SITE_NAME }],
+  authors: [{ name: 'Pinoycalculator team' }],
   openGraph: {
     type: 'website',
     locale: SITE_LOCALE,

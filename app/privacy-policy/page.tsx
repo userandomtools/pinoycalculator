@@ -57,23 +57,43 @@ const PrivacyPolicy = () => (
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-foreground mb-3">5. Data Privacy Act of 2012 (Republic Act No. 10173)</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-3">6. Children&apos;s Privacy</h2>
+        <p>
+          Pinoy Calculator does not knowingly collect or solicit personal information from anyone under the age of 13. If you are under 13, please do not attempt to register for the Website or send any personal information about yourself to us. If we learn that we have collected personal information from a child under age 13, we will delete that information as quickly as possible.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold text-foreground mb-3">7. Your Data Subject Rights</h2>
+        <p>
+          Under the Philippine Data Privacy Act, you have the following rights regarding any personal information you provide (such as when emailing us):
+        </p>
+        <ul className="list-disc pl-6 mt-3 space-y-2">
+          <li><strong>Right to be Informed:</strong> To know how your data is being processed.</li>
+          <li><strong>Right to Access:</strong> To request a copy of the data we hold about you.</li>
+          <li><strong>Right to Rectification:</strong> To correct any inaccuracies in your data.</li>
+          <li><strong>Right to Erasure:</strong> To request the deletion of your data from our systems.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold text-foreground mb-3">8. Data Privacy Act of 2012 (Republic Act No. 10173)</h2>
         <p>
           Pinoy Calculator operates in compliance with the Philippine Data Privacy Act of 2012. We ensure that all processing of personal information (if any, such as via email contact) is done with adherence to the principles of transparency, legitimate purpose, and proportionality.
         </p>
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-foreground mb-3">6. Updates to This Policy</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-3">9. Updates to This Policy</h2>
         <p>
           We may update our Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify users of any significant changes by posting the new policy on this page.
         </p>
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold text-foreground mb-3">7. Contact Us</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-3">10. Contact Us</h2>
         <p>
-          If you have any questions or concerns regarding this Privacy Policy, please reach out to us at <a href="mailto:hello@pinoycalculator.com" className="text-primary hover:underline">hello@pinoycalculator.com</a>.
+          If you have any questions or concerns regarding this Privacy Policy, please reach out to our team at <a href="mailto:hello@pinoycalculator.com" className="text-primary hover:underline">hello@pinoycalculator.com</a>.
         </p>
       </section>
     </div>

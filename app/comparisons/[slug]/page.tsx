@@ -181,6 +181,20 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
         </div>
       )}
 
+      {/* Comprehensive Analysis Content */}
+      {comp.comprehensiveContent && comp.comprehensiveContent.length > 0 && (
+        <section className="mb-16 space-y-12 border-t border-border pt-16">
+          {comp.comprehensiveContent.map((section, idx) => (
+            <div key={idx} className="prose prose-slate max-w-none">
+              <h2 className="text-3xl font-extrabold text-foreground mb-6">{section.title}</h2>
+              <div className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
+                {section.content}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
       {/* 6. FAQ Section */}
       {comp.faqs.length > 0 && (
         <div className="mb-16">
@@ -188,18 +202,18 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
             <HelpCircle className="h-6 w-6 text-primary" />
             Frequently Asked Questions
           </h2>
-          <Accordion type="single" collapsible className="w-full space-y-4">
+          <div className="space-y-10">
             {comp.faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="border rounded-xl px-4 bg-card shadow-sm">
-                <AccordionTrigger className="text-left font-bold text-foreground py-4 hover:no-underline">
+              <div key={i} className="group">
+                <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed pb-6 pt-2 border-t border-border mt-2">
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
                   {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                </p>
+              </div>
             ))}
-          </Accordion>
+          </div>
         </div>
       )}
 
@@ -226,7 +240,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
-           <span className="text-[10px] text-muted-foreground">Author: Pinoy Calculator Editorial Team</span>
+           <span className="text-[10px] text-muted-foreground">Author: Pinoycalculator team</span>
            <span className="text-[10px] text-muted-foreground">Last Updated: May 2026</span>
         </div>
       </div>
