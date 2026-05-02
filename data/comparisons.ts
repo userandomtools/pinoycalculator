@@ -276,3 +276,14 @@ export const comparisonsData: Record<string, ComparisonData> = {
     disclaimer: "Financial projections are for educational purposes. Consult a licensed tax accountant or financial advisor for official business and investment compliance."
   },
 };
+
+export function getComparisonBySlug(slug: string): ComparisonData | undefined {
+  return comparisonsData[slug];
+}
+
+export function getAllComparisons() {
+  return Object.entries(comparisonsData).map(([slug, comparison]) => ({
+    slug,
+    ...comparison,
+  }));
+}
